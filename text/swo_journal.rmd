@@ -56,6 +56,8 @@ editor_options:
 
 # Introduction
 
+[outline to work with other papers]
+
 Many integrated fishery stock assessments rely on estimates of fish population length composition either directly [@Punt2013] or as a derived quantity [e.g. age composition; @Maunder2015]. 
 The most reliable length composition estimates are based on observations from fishery-independent surveys because these platforms generally avoid the sample selection bias inherent in directed commercial fisheries [@NRC1998]. 
 Past analyses have focused on the statistical efficiency of composition estimates for data weighting and applications to likelihood functions [e.g., @Thorson2014; @Thorson2017; @Francis2017]. 
