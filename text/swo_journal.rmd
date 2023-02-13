@@ -1,5 +1,5 @@
 ---
-title: "Effort optimization of bottom trawl subsampling of fish by sex and size: tradeoffs between stock assessment effective sample size and survey workforce health and efficiency"
+title: "Effort optimization of bottom trawl subsampling of fish for length and age composition: tradeoffs between stock assessment input sample size and survey workforce health and efficiency"
 
 author:
   - name: Pete Hulson
@@ -14,12 +14,6 @@ author:
     institute: afscsearace
   - name: Matthew Siskey
     institute: uw
-  - name: William Stockhausen
-    institute: afscsearefm
-  - name: Susanne Mcdermott
-    institute: afscsearace
-  - name: Chris Long
-    institute: afscsearace
 
 institute:
   - afscjnu: Auke Bay Laboratories, Alaska Fisheries Science Center, National Marine Fisheries Service, National Oceanic and Atmospheric Administration, 17109 Point Lena Loop Rd., Juneau, AK 99801
@@ -48,19 +42,17 @@ header-includes:
 
   - \renewcommand{\eqref}{\Cref}
   - \Crefformat{equation}{#2#1#3}
+
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
-
-<!-- Don't think we'll need this for journal version -->
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, error = FALSE)
-source(here::here('R', "render_toc.R"))
-```
-
-\newpage
 
 # Abstract 
 
 [Pete]
+
+\newpage
 
 # Introduction
 
@@ -72,14 +64,16 @@ However, to increase the precision of age or length composition estimates it’s
 Further, each fish sampled on a survey has both an immediate physical labor cost (e.g. at-sea time management issues) and a cumulative health cost (e.g. repetitive stress injuries).
 
 The National Oceanic and Atmospheric Administration’s (NOAA’s) Alaska Fisheries Science Center (AFSC) has conducted effort-standardized bottom trawl surveys in the eastern Bering Sea (EBS), Gulf of Alaska (GOA) and Aleutian Islands (AI) since 1982 [@Stauffer2004]. 
-These resource surveys comprehensively catalog the biota encountered at each sampling station. Observations of sex-specific size distributions for each encountered species are collected by: (1) sorting the trawl sample by species, (2) weighing each species in aggregate, (3) obtaining a random subsample of target sample size, (4) sorting the length subsample by sex (each fish is cut with a scalpel, gonads identified and placed in a sex-specific receptacle), and (5) measuring and recording each fish length (each fish is placed on a measuring board, length is identified and the species, sex and measurement are recorded into a computer). 
-This length measurement process is repeated over 100,000 times in a given survey each year, representing a daunting amount of work for 6 field scientists per research vessel. 
+These resource surveys comprehensively catalog the biota encountered at each sampling station. 
+Observations of sex-specific size and age distributions for each encountered species are collected by: (1) sorting the trawl sample by species, (2) weighing each species in aggregate, (3) obtaining a random subsample of target length frequency sample size, (4) sorting the length subsample by sex (each fish is cut with a scalpel, gonads identified and placed in a sex-specific receptacle), (5) measuring and recording each fish length (each fish is placed on a measuring board, length is identified and the species, sex and measurement are recorded into a computer), and (6) [how ages are collected]. 
+This length measurement process is repeated over 100,000 times in a given survey each year, while collecting otoliths is repeated several thousands of times, representing a daunting amount of work for 6 field scientists per research vessel. 
 Each year, this work flow results in acute and repetitive stress injuries, some requiring medical interventions and claims to the U.S. Office of Workers' Compensation Programs. 
 Another consequence of the intensity of this work are unrecoverable errors in the observed data; as fatigue or injuries accumulate during the course of field work, so do data collection errors (e.g. failure to properly encode length measurements with the correct species or sex or incorrect identification of sex), despite extensive *in situ* quality assurance protocols.
+[age and growth lab personell constraints]
 
-At the AFSC, length frequency sampling from the bottom trawl surveys is used in stock assessment models in a variety of ways to inform estimates of population abundance that are subsequently used to set management quantities. 
+At the AFSC, age and length frequency sampling from the bottom trawl surveys is used in stock assessment models in a variety of ways to inform estimates of population abundance that are subsequently used to set management quantities. 
 The most common use of length frequency sampling is to derive estimates of the population abundance at length that are then used in an age-length key to estimate population estimates at age and the model is fit to these age composition estimates [e.g., @Spencer2020, @Monnahan2021]. 
-Length frequency samples are also used in many flatfish assessments in a conditional-age-at-length framework [e.g., @Rudd2021] that both fits the length composition and enables estimation of growth internally to the assessment [e.g., @Turnock2017]. 
+Length frequency samples are also used in many assessments in a conditional-age-at-length framework [e.g., @Rudd2021] that both fits the length composition and enables estimation of growth internally to the assessment [e.g., @Turnock2017]. 
 In some cases, where age data is not available, length frequency samples which have been expanded to population abundance at length estimates are used directly as composition data within the assessment [e.g., @Mcgilliard2019]. 
 Finally, recent developments have included using length frequency samples in a model-based framework to estimate length and age composition estimates [@Thorson2019; @Ianelli2021; @Thompson2021].
 
