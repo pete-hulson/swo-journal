@@ -207,7 +207,7 @@ knitr::kable(vroom::vroom(here::here('tables', 'ai_samples.csv')), caption = "To
 [Will figure out what figures to include - pun intended, left length flowchart here as we will have the total flowchart included]
 
 ```{r length, fig.cap="Bootstrap-simulation flow chart, the steps refer to the order of operations as described in the *Bootstrap-simulation framework* section."}
-knitr::include_graphics(here::here('figs', 'length_flowchart.png'))
+knitr::include_graphics(here::here('figs', 'full_flowchart.png'))
 ```
 
 
