@@ -38,7 +38,7 @@ csl: canjfas.csl
 header-includes:
   - \usepackage(amsmath) # for cases in equations
   - \usepackage{booktabs}
-  - \usepackaee{cleveref}
+  - \usepackage{cleveref}
 
   - \renewcommand{\eqref}{\Cref}
   - \Crefformat{equation}{#2#1#3}
@@ -65,8 +65,8 @@ Further, each fish sampled on a survey has an immediate physical labor cost (e.g
 
 It has become commonly understood that sampling to determine age and length composition on fishery-independent or fishery-dependent platforms can be influenced by intra-haul correlation, or, that samples taken from a school of fish that are very similar to each other in size and/or age may not be representative of the overall population’s size and/or age distribution [e.g., @Pennington2000]. 
 In order to evaluate and identify the level of intra-haul correlation, and how this can be accounted for in stock assessment, the concept of ‘effective sample size’ has been developed, in which the effective sample size is smaller than the actual sample size and reflects the increase in uncertainty that is due to the intra-haul correlation displayed by the species that are sampled [e.g., @Mcallister1997]. 
-A number of studies have used effective sample size to evaluate the impact on assessment results including whether effective sample size can be estimated by the assessment model (@Francis2017; @Thorson2017; @Hulson2012) and more recently as a tool to evaluate the implications of changes to sampling methodologies and the subsequent influence on assessment model results [@Siskey2022]. 
-Further, methods have been developed that mimic the sampling design for length and age composition that estimate effective sample size from collected samples trough bootstrap techniques that are external to an assessment model (@Stewart2014).
+A number of studies have used effective sample size to evaluate the impact on assessment results including whether effective sample size can be estimated by the assessment model [@Francis2017; @Thorson2017; @Hulson2012] and more recently as a tool to evaluate the implications of changes to sampling methodologies and the subsequent influence on assessment model results [@Siskey2022]. 
+Further, methods have been developed that mimic the sampling design for length and age composition that estimate effective sample size from collected samples trough bootstrap techniques that are external to an assessment model [@Stewart2014].
 Overall, the use of effective sample size has become a universal method to implement uncertainty caused by overdispersion of samples in length and age composition data.
 
 Within a fishery-independent survey, thousands of samples are obtained for both age and length composition across multiple species.
