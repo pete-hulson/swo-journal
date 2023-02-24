@@ -1,16 +1,16 @@
 Stock,Scientific name,AI,EBS,GOA
-Alaska plaice,Pleuronectes quadrituberculatus,,10486 (327),
-arrowtooth flounder,Atheresthes stomias,9868 (460),14928 (702),36842 (597)
-Atka mackerel,Pleurogrammus monopterygius,7888 (610),,
-Dover sole,Microstomus pacificus,,,3020 (224)
-flathead sole,Hippoglossoides elassodon,4602 (0),22356 (810),15233 (225)
-Greenland turbot,Reinhardtius hippoglossoides,,266 (131),
-Kamchatka flounder,Atheresthes evermanni,3526 (0),2454 (460),
-northern rock sole,Lepidopsetta polyxystra,10754 (0),24698 (584),3685 (197)
-northern rockfish,Sebastes polyspinis,14928 (571),,2298 (447)
-Pacific cod,Gadus macrocephalus,5723 (604),11477 (1449),3452 (464)
-Pacific ocean perch,Sebastes alutus,32491 (1019),,23319 (1150)
-rex sole,Glyptocephalus,,,12878 (412)
-southern rock sole,Lepidopsetta billineta,,,7190 (730)
-walleye pollock,Gadus chalcogrammus,10806 (791),49544 (1600),16772 (1075)
-yellowfin sole,Limanda aspera,,28108 (845),
+Alaska plaice,Pleuronectes quadrituberculatus,--,"10,486 (327)",--
+arrowtooth flounder,Atheresthes stomias,"9,868 (460)","14,928 (702)","36,842 (597)"
+Atka mackerel,Pleurogrammus monopterygius,"7,888 (610)",--,--
+Dover sole,Microstomus pacificus,--,--,"3,020 (224)"
+flathead sole,Hippoglossoides elassodon,"4,602 (0)","22,356 (810)","15,233 (225)"
+Greenland turbot,Reinhardtius hippoglossoides,--,266 (131),--
+Kamchatka flounder,Atheresthes evermanni,"3,526 (0)","2,454 (460)",--
+northern rock sole,Lepidopsetta polyxystra,"10,754 (0)","24,698 (584)","3,685 (197)"
+northern rockfish,Sebastes polyspinis,"14,928 (571)",--,"2,298 (447)"
+Pacific cod,Gadus macrocephalus,"5,723 (604)","11,477 (1,449)","3,452 (464)"
+Pacific ocean perch,Sebastes alutus,"3,2491 (1,019)",--,"23,319 (1,150)"
+rex sole,Glyptocephalus,--,--,"12,878 (412)"
+southern rock sole,Lepidopsetta billineta,--,--,"7,190 (730)"
+walleye pollock,Gadus chalcogrammus,"10,806 (791)","4,9,544 (1600)","16,772 (1,075)"
+yellowfin sole,Limanda aspera,--,"28,108 (845)",--
