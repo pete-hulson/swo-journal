@@ -26,7 +26,7 @@ output:
   bookdown::word_document2:
     toc: false
     number_sections: false
-    reference_docx: styles_reference.docx
+    reference_docx: styles_reference_ph.docx
     pandoc_args:  
       - '--lua-filter=scholarly-metadata.lua'
       - '--lua-filter=author-info-blocks.lua'
@@ -52,6 +52,8 @@ editor_options:
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, error = FALSE)
 source(here::here('R', "render_toc.R"))
 ```
+
+\newpage
 
 # Abstract 
 
