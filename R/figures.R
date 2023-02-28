@@ -126,8 +126,26 @@ lensub %>%
                     sub_samp = factor(sub_samp)) %>% 
   tidytable::select(-iss_age_base, -iss_len_base) -> plot_dat
 
+# goa
 plot_dat %>%  
-  tidytable::filter(region == 'goa') %>% 
+  tidytable::filter(region == 'goa' & species_code == 30060) %>% 
+  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250', 'base')), 
+                y = p_base_len, 
+                fill = comp_type)) +
+  geom_boxplot() +
+  facet_wrap( ~ species_name, 
+              # scales = "free",
+              # labeller = labeller(region = surv_labs),
+  ) +
+  xlab("Sub-sampling level") +
+  ylab("Proportion of base input sample size") +
+  geom_abline(slope = 0, intercept = 0.9, colour = "grey") +
+  scale_fill_scico_d(palette = 'roma',
+                     name = "Composition type")
+
+# bs
+plot_dat %>%  
+  tidytable::filter(region == 'bs' & species_code == 30060) %>% 
   ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250', 'base')), 
                 y = p_base_len, 
                 fill = comp_type)) +
@@ -136,6 +154,23 @@ plot_dat %>%
              # scales = "free",
              # labeller = labeller(region = surv_labs),
              ) +
+  xlab("Sub-sampling level") +
+  ylab("Proportion of base input sample size") +
+  geom_abline(slope = 0, intercept = 0.9, colour = "grey") +
+  scale_fill_scico_d(palette = 'roma',
+                     name = "Composition type")
+
+# ai
+plot_dat %>%  
+  tidytable::filter(region == 'ai' & species_code == 30060) %>% 
+  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250', 'base')), 
+                y = p_base_len, 
+                fill = comp_type)) +
+  geom_boxplot() +
+  facet_wrap( ~ species_name, 
+              # scales = "free",
+              # labeller = labeller(region = surv_labs),
+  ) +
   xlab("Sub-sampling level") +
   ylab("Proportion of base input sample size") +
   geom_abline(slope = 0, intercept = 0.9, colour = "grey") +
