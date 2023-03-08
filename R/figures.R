@@ -42,14 +42,14 @@ ggplot2::theme_set(
 
 spec <- vroom::vroom(here::here('data', 'species_code_name.csv')) # species_code and common names
 
-agesub_iss <- vroom::vroom(here::here('output', 'agesub_iss.csv')) # age subsample cases
-agesub_ess <- vroom::vroom(here::here('output', 'big_output', 'agesub_ess.csv')) # age subsample cases
-
-lensub_iss <- vroom::vroom(here::here('output', 'totlen_iss.csv')) # age subsample cases
-lensub_ess <- vroom::vroom(here::here('output', 'big_output', 'totlen_ess.csv')) # age subsample cases
-
-sexsub_iss <- vroom::vroom(here::here('output', 'sexlen_iss.csv')) # age subsample cases
-sexsub_ess <- vroom::vroom(here::here('output', 'big_output', 'sexlen_ess.csv')) # age subsample cases
+agesub_iss <- vroom::vroom(here::here('output', 'agesub_iss.csv')) %>% 
+  tidytable::filter(!(species_code %in% c(10112, 10115, 10180)))
+agesub_ess <- vroom::vroom(here::here('output', 'big_output', 'agesub_ess.csv')) %>% 
+  tidytable::filter(!(species_code %in% c(10112, 10115, 10180)))
+lensub_iss <- vroom::vroom(here::here('output', 'totlen_iss.csv')) %>% 
+  tidytable::filter(!(species_code %in% c(10112, 10115, 10180)))
+lensub_ess <- vroom::vroom(here::here('output', 'big_output', 'totlen_ess.csv')) %>% 
+  tidytable::filter(!(species_code %in% c(10112, 10115, 10180)))
 
 surv_labs <- c("Aleutian Islands", "Bering Sea Shelf", "Gulf of Alaska")
 names(surv_labs) <- c("ai", "bs", "goa")
@@ -277,7 +277,7 @@ plot_dat1_bs %>%
                 fill = comp_type)) +
   geom_boxplot2(width.errorbar = 0) +
   facet_grid(species_name ~ comp_type, 
-             scales = "free",
+             # scales = "free",
              labeller = label_wrap_gen(10)) +
   theme(legend.position = "none",
         text = element_text(size = 13)) +
@@ -329,12 +329,13 @@ ggsave(here::here("figs", "ai_length_iss_examp.png"),
 
 # goa
 plot_dat1_goa %>% 
+  tidytable::drop_na() %>% 
   ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
                 y = iss_age, 
                 fill = comp_type)) +
   geom_boxplot2(width.errorbar = 0) +
   facet_grid(species_name ~ comp_type, 
-             scales = "free",
+             # scales = "free",
              labeller = label_wrap_gen(10)) +
   theme(legend.position = "none",
         text = element_text(size = 13)) +
@@ -378,7 +379,7 @@ plot_dat1_ai %>%
                 fill = comp_type)) +
   geom_boxplot2(width.errorbar = 0) +
   facet_grid(species_name ~ comp_type, 
-             scales = "free",
+             # scales = "free",
              labeller = label_wrap_gen(10)) +
   theme(legend.position = "none",
         text = element_text(size = 13)) +
@@ -407,12 +408,18 @@ lensub_iss %>%
   tidytable::drop_na()-> plot_dat2
 
 plot_dat2 %>% 
+  tidytable::mutate(surv_labs = case_when(region == 'goa' ~ "Gulf of Alaska",
+                                          region == 'ai' ~ "Aleutian Islands",
+                                          region == 'bs' ~ "Bering Sea Shelf")) %>% 
   ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
                 y = p_base_len, 
                 fill = comp_type)) +
   geom_boxplot2(width.errorbar = 0) +
-  facet_wrap(species_name ~ region,
-             labeller = labeller(region = surv_labs)) +
+  facet_wrap(species_name ~ surv_labs,
+             labeller = function (labels) {
+               labels <- lapply(labels, as.character)
+               list(do.call(paste, c(labels, list(sep = "\n"))))
+             }) +
   theme(legend.position = "bottom",
         axis.text.x = element_text(angle = -45, hjust = 0),
         text = element_text(size = 11)) +
@@ -534,6 +541,7 @@ ggsave(here::here("figs", "ai_age_ess_examp.png"),
 # goa
 agesub_iss %>% 
   tidytable::left_join(spec) %>% 
+  tidytable::drop_na() %>% 
   tidytable::filter(region == 'goa') %>% 
   tidytable::mutate(p_base_len = sub_iss_age / base_iss_age,
                     sub_samp = case_when(sub_samp == 'a25' ~ '25%',
@@ -549,7 +557,7 @@ plot_dat3_goa %>%
                 fill = comp_type)) +
   geom_boxplot2(width.errorbar = 0) +
   facet_grid(species_name ~ comp_type, 
-             scales = "free",
+             # scales = "free",
              labeller = label_wrap_gen(10)) +
   theme(legend.position = "none",
         text = element_text(size = 13)) +
@@ -615,7 +623,7 @@ plot_dat3_ai %>%
                 fill = comp_type)) +
   geom_boxplot2(width.errorbar = 0) +
   facet_grid(species_name ~ comp_type, 
-             scales = "free",
+             # scales = "free",
              labeller = label_wrap_gen(10)) +
   theme(legend.position = "none",
         text = element_text(size = 13)) +
@@ -650,15 +658,23 @@ agesub_iss %>%
   tidytable::drop_na()-> plot_dat4
 
 plot_dat4 %>% 
+  tidytable::mutate(surv_labs = case_when(region == 'goa' ~ "Gulf of Alaska",
+                                          region == 'ai' ~ "Aleutian Islands",
+                                          region == 'bs' ~ "Bering Sea Shelf")) %>% 
   ggplot(., aes(x = factor(sub_samp, level = c('25%', '50%', '75%', '90%')), 
                 y = p_base_age, 
                 fill = comp_type)) +
   geom_boxplot2(width.errorbar = 0) +
-  facet_wrap(species_name ~ region,
-             labeller = labeller(region = surv_labs)) +
+  facet_wrap(species_name ~ surv_labs,
+             # labeller = labeller(region = surv_labs)) +
+             labeller = function (labels) {
+               labels <- lapply(labels, as.character)
+               list(do.call(paste, c(labels, list(sep = "\n"))))
+             }) +
   theme(legend.position = "bottom",
         axis.text.x = element_text(angle = -45, hjust = 0),
-        text = element_text(size = 11)) +
+        text = element_text(size = 11),
+        panel.spacing.y = unit(0, "cm")) +
   xlab("Total age collection sub-sampling level") +
   ylab("Age composition proportion of full dataset input sample size") +
   scale_fill_scico_d(palette = 'roma',
