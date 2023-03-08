@@ -187,6 +187,48 @@ Herein, when we use the term ‘effective sample size’ we are referring to the
 
 # Results
 
+sub-sampling for length results:
+
+as number of samples taken in hauls decreased, the effective sample size decreased, but not drastically (goa example fig)
+
+this was generally the case for nearly all species, and across sex categories
+
+exceptions: dover sole, greenland turbot (bs) and kamchatka flounder (bs) - all have small length freq sample sizes
+
+sex-specific effective sample size was smaller than the total (combined sex) effective sample size for each stock and within each subsampling case evaluated
+
+magnitude of length comp ess was species-specific, but generally ranged from 250 to 5000
+
+age composition effective sample size for all stocks within each region was unaffected by length subsampling (goa examp fig)
+
+
+proportion of base results:
+
+as subsampling level decreased the proportion of the full dataset input sample size decreased
+
+magnitude of decrease was region and species specific
+
+largest decrease amounted to 60% of input sample size of the full dataset for subsampling level of 50
+
+it was generally the case that sampling 100 lengths resulted in input sample sizes >90% of the full dataset sample size
+
+sampling at a level of 100 per haul would save greater than 20,000, and upwards of 30,000 average number of sex-specific length collections across the regions evaluated (ss_saved table)
+
+
+proportion age results:
+
+as subsampling proportion of full age dataset decreased the effective sample size decreased
+
+this resulted for all species and sex categories
+
+
+
+
+When limiting the number of length frequency samples taken within a haul 
+
+
+
+
 [length results for selected species, including samples saved, ess and iss reductions - Pete and Ben/Meaghan]
 
 [age results, including ess and iss reductions - Pete and Ben/Meaghan]

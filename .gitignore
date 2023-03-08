@@ -2,6 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
-output/ai/
-output/bs/
-output/goa/
+output/
+figs/
