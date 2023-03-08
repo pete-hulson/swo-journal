@@ -122,9 +122,9 @@ Strata are defined as regions which have similar bathymetric characterstics, in 
 Age-length-keys (ALKs) generated from the age-length paired observations within a survey are then applied to estimated abundance-at-length to provide an estimate of abundance-at-age [e.g., @QuinnDeriso1999].
 Currently, no species age composition are estimated using depth or area stratified ALKs, rather, all observations are pooled for the entirety of the survey area each survey year. 
 The specific methods AFSC uses to expand length and age samples to abundance are shown in @Hulson2023b. 
-The stocks selected for this analysis are shown in Table \@ref(tab:species_sample)), and were selected because all are assessed by AFSC with statistical catch-at-age models and have corresponding expanded age and/or length composition estimates from the respective bottom trawl surveys. 
+The stocks selected for this analysis are shown in Table \@ref(tab:species-samples)), and were selected because all are assessed by AFSC with statistical catch-at-age models and have corresponding expanded age and/or length composition estimates from the respective bottom trawl surveys. 
 Data from the recent three survey years for each survey were used in this analysis in order to show results that reflect consequences of sub-sampling that were most applicable to the current status of the stocks. 
-The average length and age sample sizes from the most recent three survey years for the species selected by survey are also shown in Table \@ref(tab:species_samples)). 
+The average length and age sample sizes from the most recent three survey years for the species selected by survey are also shown in Table \@ref(tab:species-samples)). 
 
 ## Simulation-Bootstrap framework
 
@@ -133,7 +133,7 @@ We used the historical length frequency and age specimen data that were collecte
 The bootstrap-simulation framework is composed of a suite of nested resampling protocols. 
 Bootstrap resampling was performed either with replacement (wr) or without replacement (wor) depending on the needs of a particular protocol. 
 Functions to run the sampling protocols were developed in a compartmentalized manner to provide for substantial flexibility in exploring desired resampling protocols. 
-The order of operations (Figure \@ref(fig:bs_flows) *ben - could we add in a part that sub-samples ages too to this figure?*) has the following schedule:
+The order of operations (Figure \@ref(fig:bs-flows) *ben - could we add in a part that sub-samples ages too to this figure?*) has the following schedule:
 
 1. Resample hauls (wr) from the set of hauls with associated catch per unit effort (in numbers). 
 2. Within the resampled hauls from step 1, resample the observed lengths (wr).
@@ -179,61 +179,41 @@ For each iteration of the bootstrap simulation for a determined sub-sample size 
 Thus, across each iteration of the bootstrap simulation we computed an effective sample size that indicated the amount of increased uncertainty that was caused by sub-sampling length frequency and age specimen data. 
 To summarize effective sample size across iterations we used the harmonic mean, which has been shown to reduce bias in recovering the true sample size in simulations for a multinomial distribution. 
 Due to this reduction in bias the harmonic mean has also been recommended to determine the ‘input sample size’ that is used in stock assessment models to fit compositional data [@Stewart2014]. 
-Herein, when we use the term ‘effective sample size’ we are referring to the effective sample sizes that were computed for each iteration of the bootstrap-simulation, when we use the term ‘input sample size’ we are referring to the harmonic mean of the iterated effective sample sizes. 
-
-## Evaluating life-history relationships to consequences of subsampling
-
-[add text here describing what was done to compare reductions to life history]
+Herein, when we use the term ‘iterated effective sample size’ (iterated ESS) we are referring to the effective sample sizes that were computed for each iteration of the bootstrap-simulation, when we use the term ‘input sample size’ (ISS) we are referring to the harmonic mean of the iterated effective sample sizes. 
+Here we show both results of the iterated ESS and the proportion of of the full sample ISS for each sub-sampling case evaluated for either age or length composition sampling.
+The proportion of full sample ISS was computed by pairing ISS as computed for the full dataset with no sub-sampling and the ISS for the dataset at the pre-determined sub-sampling level, and then dividing the sub-sampled data ISS by the full dataset ISS.
+This provides the proportion, or percent, of the full dataset ISS for the ISS at the sub-sampling level evaluated, which gives an indication of the amount of uncertainty that was increased by sub-sampling.
 
 # Results
 
-sub-sampling for length results:
+As number of samples taken for length frequency within hauls decreased, the iterated ESS decreased, but not drastically (Figure \@ref(fig:bs-length-ess), shown for EBS stocks as an example).
+While we show the EBS stocks sampled in the 2021 shelf bottom trawl survey as an example, this trend of decreasing length composition iterated ESS with decreasing haul sub-sampling level for length frequency also resulted across all the years of the surveys evaluated, across all stocks evaluated, and across all sex categories evaluated.
+There were three exceptions, however, for Greenland turbot and Kamchatka flounder in the EBS, and dover sole in the GOA, in which the iterated ESS was unaffected by the sub-sampling level. 
+The result occurred because these stocks are not encountered in these surveys at high rates (Table \@ref(tab:species_sample)) and very few hauls had greater than fifty length frequency samples.
+For all stocks evaluated the sex-specific iterated ESS (and subsequent ISS) were smaller than the total (combined sex) iterated ESS, this remained true within each individual sub-sampling case.
+The magnitude of length composition iterated ESS (and subsequent ISS) was stock-specific and sex category-specific; across survey years the length composition ISS generally ranged from 250 to 5,000.
+Across the length-freqeuncy haul level sub-sampling cases evaluated, the age composition iterated ESS for all stocks within each region was unaffected by length sub-sampling (Figure \@ref(fig:bs-age-length-ess), shown for EBS stocks as an example).
 
-as number of samples taken in hauls decreased, the effective sample size decreased, but not drastically (goa example fig)
+Similar to the results of length composition iterated ESS at different sub-sampling levels, as the sub-sampling level within a haul decreased the proportion of the full dataset ISS for the sub-sampled dataset ISS decreased (Figure \@ref(fig:prop-length-iss)).
+This decrease in the proportion of length composition sub-sampled dataset ISS to full dataset ISS was generally consistent (with the exception of the stocks that were unaffected by sub-sampling as noted previously), although the magnitude of decrease was region and stock-specific.
+While the magnitude of decrease in the proportion of length composition ISS was region and sex-specific, none of the stocks decreased to further than 50% of the full dataset ISS.
+For the majority of stocks evaluated, the proportion of full dataset ISS stayed above 90% for length frequency sub-sampling levels of 100 fish per haul or more, and were all greater than 90% for length frequency sub-sampling levels of 150 fish per haul regardless of length composition sex category.
+Sampling at a level of 100 to 150 fish per haul for length frequency would result in 8,000 to greater than 30,000 fewer collections per-year within the surveys evaluated (Table \@ref(tab:ss-saved)).
 
-this was generally the case for nearly all species, and across sex categories
-
-exceptions: dover sole, greenland turbot (bs) and kamchatka flounder (bs) - all have small length freq sample sizes
-
-sex-specific effective sample size was smaller than the total (combined sex) effective sample size for each stock and within each subsampling case evaluated
-
-magnitude of length comp ess was species-specific, but generally ranged from 250 to 5000
-
-age composition effective sample size for all stocks within each region was unaffected by length subsampling (goa examp fig)
-
-
-proportion of base results:
-
-as subsampling level decreased the proportion of the full dataset input sample size decreased
-
-magnitude of decrease was region and species specific
-
-largest decrease amounted to 60% of input sample size of the full dataset for subsampling level of 50
-
-it was generally the case that sampling 100 lengths resulted in input sample sizes >90% of the full dataset sample size
-
-sampling at a level of 100 per haul would save greater than 20,000, and upwards of 30,000 average number of sex-specific length collections across the regions evaluated (ss_saved table)
-
-
-proportion age results:
-
-as subsampling proportion of full age dataset decreased the effective sample size decreased
-
-this resulted for all species and sex categories
-
-
-
-
-When limiting the number of length frequency samples taken within a haul 
-
-
-
-
-[length results for selected species, including samples saved, ess and iss reductions - Pete and Ben/Meaghan]
-
-[age results, including ess and iss reductions - Pete and Ben/Meaghan]
+While the age composition iterated ESS (and subsequent ISS) was unaffected by the length frequency sub-sampling level, the iterated ESS did markedly decrease as the proportion of total age collections decreased (Figure \@ref(fig:bs-age-ess), shown for EBS stocks as an example); this result was consistent across all stocks and sex categories evaluated.
+Similar to the results for length composition, the sex-specific iterated ESS and ISS were smaller than the total (combined sex) iterated ESS and ISS across all stocks evaluated.
+Also, the magnitude of sex-specific and total iterated ESS and subsequent ISS were stock-specific, and ranged from 10 to 500; smaller than the length composition iterated ESS and ISS in the same year for the same stock.
+The proportion of decrease from the full dataset ISS, as was the magnitude of ISS, was region and stock-specific, as was the variability in the decrease in ISS across the survey years (Figure \@ref(fig:prop-age-iss)).
+For all the stocks evaluated, the proportion of decrease from the full dataset ISS was greater than 90% for a 90% decrease in the total age collections.
+Further, for all stocks evaluated, the decrease in ISS was dampened when compared to the decrease in total age samples collected (Figure \@ref(fig:prop-age-iss-nss)).
+For example, a reduction to 25% of the total age samples did not translate to a 25% reduction in the ISS, but rather resulted in a 30-40% reduction in ISS.
+For all stocks and sex categories evaluated, the reduction in ISS was less than the reduction in the total age samples collected on the surveys.
 
 # Discussion
+
+for length comps, since there was no change decreasing down to 150 or so, there would be no change if increasing past the base sampling level either, not as clear for increasing age comp collections
+
+
 
 [Summary para of main results]
 
@@ -255,21 +235,44 @@ We thank *reviewer1* and *reviewer2* for their helpful reviews of this manuscrip
 
 # Tables 
 
-```{r species_sample}
+```{r species-samples}
 knitr::kable(vroom::vroom(here::here('tables', 'species_sample.csv')), caption = "Average length and age (shown in parentheses) samples from the most recent three AFSC bottom trawl surveys by region for the species evaluated in the bootstrap-simulation for reduction in length and age collections.", align = c('llccc'), format.args = list(big.mark = ",", scientific = FALSE))
+```
+
+```{r ss-saved}
+knitr::kable(vroom::vroom(here::here('tables', 'ss_saved.csv')), caption = "Average total number of reductions in length frequency samples when sampling 100 and 150 fish per haul by stock and region evaluated.", align = c('lccc'), format.args = list(big.mark = ",", scientific = FALSE))
 ```
 
 \newpage
 
 # Figures 
 
-```{r bs_flows, fig.cap="Bootstrap-simulation flow chart, the steps refer to the order of operations as described in the *Bootstrap-simulation framework* section."}
+```{r bs-flows, fig.cap="Bootstrap-simulation flow chart, the steps refer to the order of operations."}
 knitr::include_graphics(here::here('figs', 'full_flowchart.png'))
 ```
 
+```{r bs-length-ess, fig.cap="Length composition interated effective sample size across length frequency sub-sampling levels evaluated for Eastern Bering Sea stocks sampled in the 2021 shelf bottom trawl survey."}
+knitr::include_graphics(here::here('figs', 'bs_length_ess_examp.png'))
+```
 
+```{r bs-age-length-ess, fig.cap="Age composition interated effective sample size across length frequency sub-sampling levels evaluated for Eastern Bering Sea stocks sampled in the 2021 shelf bottom trawl survey."}
+knitr::include_graphics(here::here('figs', 'bs_age_length_ess_examp.png'))
+```
 
+```{r prop-length-iss, fig.cap="Proportion of full dataset length composition input sample size across length frequency sub-sampling levels evaluated."}
+knitr::include_graphics(here::here('figs', 'prop_iss_length.png'))
+```
 
+```{r bs-age-ess, fig.cap="Age composition interated effective sample size across total age collection sub-sampling levels evaluated for Eastern Bering Sea stocks sampled in the 2021 shelf bottom trawl survey."}
+knitr::include_graphics(here::here('figs', 'bs_age_ess_examp.png'))
+```
 
+```{r prop-age-iss, fig.cap="Proporion of reduction in input sample size compared to full dataset input sample size across total age collection sub-sampling levels evaluated."}
+knitr::include_graphics(here::here('figs', 'prop_iss_age.png'))
+```
+
+```{r prop-age-iss-nss, fig.cap="Proporion of reduction in input sample size (compared to full dataset input sample size) compared to prortion of reduction in total age sample size."}
+knitr::include_graphics(here::here('figs', 'p_age_iss_nss.png'))
+```
 
 

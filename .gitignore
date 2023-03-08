@@ -2,5 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
-output/
-figs/
+output/big_output
+figs/ref_figs

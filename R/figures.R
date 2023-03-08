@@ -43,13 +43,13 @@ ggplot2::theme_set(
 spec <- vroom::vroom(here::here('data', 'species_code_name.csv')) # species_code and common names
 
 agesub_iss <- vroom::vroom(here::here('output', 'agesub_iss.csv')) # age subsample cases
-agesub_ess <- vroom::vroom(here::here('output', 'agesub_ess.csv')) # age subsample cases
+agesub_ess <- vroom::vroom(here::here('output', 'big_output', 'agesub_ess.csv')) # age subsample cases
 
 lensub_iss <- vroom::vroom(here::here('output', 'totlen_iss.csv')) # age subsample cases
-lensub_ess <- vroom::vroom(here::here('output', 'totlen_ess.csv')) # age subsample cases
+lensub_ess <- vroom::vroom(here::here('output', 'big_output', 'totlen_ess.csv')) # age subsample cases
 
 sexsub_iss <- vroom::vroom(here::here('output', 'sexlen_iss.csv')) # age subsample cases
-sexsub_ess <- vroom::vroom(here::here('output', 'sexlen_ess.csv')) # age subsample cases
+sexsub_ess <- vroom::vroom(here::here('output', 'big_output', 'sexlen_ess.csv')) # age subsample cases
 
 surv_labs <- c("Aleutian Islands", "Bering Sea Shelf", "Gulf of Alaska")
 names(surv_labs) <- c("ai", "bs", "goa")
@@ -449,9 +449,9 @@ plot_dat3_goa %>%
   geom_boxplot2(width.errorbar = 0) +
   facet_grid(species_name ~ comp_type, 
              scales = "free",
-             labeller = labeller(region = surv_labs)) +
+             labeller = label_wrap_gen(10)) +
   theme(legend.position = "none",
-        text = element_text(size = 11)) +
+        text = element_text(size = 13)) +
   xlab("Total age collection sub-sampling level") +
   ylab("Age composition iterated effective sample size") +
   scale_fill_scico_d(palette = 'roma',
@@ -482,9 +482,9 @@ plot_dat3_bs %>%
   geom_boxplot2(width.errorbar = 0) +
   facet_grid(species_name ~ comp_type, 
              scales = "free",
-             labeller = labeller(region = surv_labs)) +
+             labeller = label_wrap_gen(10)) +
   theme(legend.position = "none",
-        text = element_text(size = 11)) +
+        text = element_text(size = 13)) +
   xlab("Total age collection sub-sampling level") +
   ylab("Age composition iterated effective sample size") +
   scale_fill_scico_d(palette = 'roma',
@@ -515,9 +515,9 @@ plot_dat3_ai %>%
   geom_boxplot2(width.errorbar = 0) +
   facet_grid(species_name ~ comp_type, 
              scales = "free",
-             labeller = labeller(region = surv_labs)) +
+             labeller = label_wrap_gen(10)) +
   theme(legend.position = "none",
-        text = element_text(size = 11)) +
+        text = element_text(size = 13)) +
   xlab("Total age collection sub-sampling level") +
   ylab("Age composition iterated effective sample size") +
   scale_fill_scico_d(palette = 'roma',
@@ -528,6 +528,110 @@ ggsave(here::here("figs", "ai_age_ess_examp.png"),
        device = "png",
        width = 6,
        height = 7)
+
+# plot age iss subsample example ----
+
+# goa
+agesub_iss %>% 
+  tidytable::left_join(spec) %>% 
+  tidytable::filter(region == 'goa') %>% 
+  tidytable::mutate(p_base_len = sub_iss_age / base_iss_age,
+                    sub_samp = case_when(sub_samp == 'a25' ~ '25%',
+                                         sub_samp == 'a50' ~ '50%',
+                                         sub_samp == 'a75' ~ '75%',
+                                         sub_samp == 'a90' ~ '90%'),
+                    sub_samp = factor(sub_samp)) -> plot_dat3_goa
+
+
+plot_dat3_goa %>% 
+  ggplot(., aes(x = factor(sub_samp, level = c('25%', '50%', '75%', '90%')), 
+                y = sub_iss_age, 
+                fill = comp_type)) +
+  geom_boxplot2(width.errorbar = 0) +
+  facet_grid(species_name ~ comp_type, 
+             scales = "free",
+             labeller = label_wrap_gen(10)) +
+  theme(legend.position = "none",
+        text = element_text(size = 13)) +
+  xlab("Total age collection sub-sampling level") +
+  ylab("Age composition input sample size") +
+  scale_fill_scico_d(palette = 'roma',
+                     name = "Composition type") -> goa_iss_age
+
+ggsave(here::here("figs", "goa_age_iss_examp.png"),
+       goa_iss_age,
+       device = "png",
+       width = 6,
+       height = 7)
+
+# bs
+agesub_iss %>% 
+  tidytable::left_join(spec) %>% 
+  tidytable::filter(region == 'bs') %>% 
+  tidytable::mutate(p_base_len = sub_iss_age / base_iss_age,
+                    sub_samp = case_when(sub_samp == 'a25' ~ '25%',
+                                         sub_samp == 'a50' ~ '50%',
+                                         sub_samp == 'a75' ~ '75%',
+                                         sub_samp == 'a90' ~ '90%'),
+                    sub_samp = factor(sub_samp)) -> plot_dat3_bs
+
+
+plot_dat3_bs %>% 
+  ggplot(., aes(x = factor(sub_samp, level = c('25%', '50%', '75%', '90%')), 
+                y = sub_iss_age, 
+                fill = comp_type)) +
+  geom_boxplot2(width.errorbar = 0) +
+  facet_grid(species_name ~ comp_type, 
+             scales = "free",
+             labeller = label_wrap_gen(10)) +
+  theme(legend.position = "none",
+        text = element_text(size = 13)) +
+  xlab("Total age collection sub-sampling level") +
+  ylab("Age composition input sample size") +
+  scale_fill_scico_d(palette = 'roma',
+                     name = "Composition type") -> bs_iss_age
+
+ggsave(here::here("figs", "bs_age_iss_examp.png"),
+       bs_iss_age,
+       device = "png",
+       width = 6,
+       height = 7)
+
+# ai
+agesub_iss %>% 
+  tidytable::left_join(spec) %>% 
+  tidytable::filter(region == 'ai') %>% 
+  tidytable::mutate(p_base_len = sub_iss_age / base_iss_age,
+                    sub_samp = case_when(sub_samp == 'a25' ~ '25%',
+                                         sub_samp == 'a50' ~ '50%',
+                                         sub_samp == 'a75' ~ '75%',
+                                         sub_samp == 'a90' ~ '90%'),
+                    sub_samp = factor(sub_samp)) -> plot_dat3_ai
+
+
+plot_dat3_ai %>% 
+  ggplot(., aes(x = factor(sub_samp, level = c('25%', '50%', '75%', '90%')), 
+                y = sub_iss_age, 
+                fill = comp_type)) +
+  geom_boxplot2(width.errorbar = 0) +
+  facet_grid(species_name ~ comp_type, 
+             scales = "free",
+             labeller = label_wrap_gen(10)) +
+  theme(legend.position = "none",
+        text = element_text(size = 13)) +
+  xlab("Total age collection sub-sampling level") +
+  ylab("Age composition input sample size") +
+  scale_fill_scico_d(palette = 'roma',
+                     name = "Composition type") -> ai_iss_age
+
+ggsave(here::here("figs", "ai_age_iss_examp.png"),
+       ai_iss_age,
+       device = "png",
+       width = 6,
+       height = 7)
+
+
+
 
 # plot age subsample proportion of base for all species ----
 
