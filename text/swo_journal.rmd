@@ -102,7 +102,10 @@ The use of effective sample size, particularity when evaluating sampling strateg
 An additional consideration when evaluating the consequences of optimizing sampling effort is the impacts on a species-by-species basis to determine whether there are life-history characteristics that minimize the impacts of reduction in sampling effort in one species compared to another.
 
 In this study, using data collected by the AFSC bottom trawl surveys across the EBS, AI, and GOA we evaluate the consequences of reductions in length frequency collections (including sex-specific length frequency) coupled with reductions in age composition sampling.
-Using effective sample size as the primary statistic to evaluate uncertainty in the age and length composition data that is derived from the bottom trawl surveys, we evaluated the impact of reducing sampling to answer three questions 1) what is the impact of reducing sampling in length frequency sampling (including sex determination sampling) and the subsequent expansion to age composition on the uncertainty in the composition data? 2) Is there a point of diminishing returns as we increase the number of age and length samples? And, 3) are there life-history characteristics that mitigate, or exaggerate, the consequences of reductions in age or length composition sampling?
+Using effective sample size as the primary statistic to evaluate uncertainty in the age and length composition data that is derived from the bottom trawl surveys, we evaluated the impact of reducing sampling to answer three questions 1) what is the impact of reducing sampling in length frequency sampling (including sex determination sampling) and the subsequent expansion to age composition on the uncertainty in the composition data? 
+2) What is the impact of reducing sampling for age on uncertainty in age composition data? 
+3) Is there a point of diminishing returns as we increase the number of age and length samples? 
+And, 4) are there life-history characteristics that mitigate, or exaggerate, the consequences of reductions in age or length composition sampling?
 
 # Methods
 
@@ -225,30 +228,47 @@ Regardless, for all stocks and sex categories evaluated, the reduction in ISS wa
 
 # Discussion
 
-for length comps, since there was no change decreasing down to 150 or so, there would be no change if increasing past the base sampling level either, not as clear for increasing age comp collections
+In this study, we developed a method to evaluate the consequences of reduced sampling effort on uncertainty in age and length composition data and demonstrated the proportional decrease in the ISS of reduced sampling datasets.
+We found that the ISS for age composition data was more sensitive to reductions in sampling effort than the ISS for length composition.
+While the age composition ISS was sensitive to reductions in age sampling effort, we also show that the ISS for age composition was unaffected by the level of sub-sampling in the length frequency collections.
+Looking across multiple survey regions revealed that these reductions in ISS, or increase in uncertainty, of length and age composition were stock specific, but generally consistent.
+We find, based on the proportional decrease in ISS from sub-sampled data compared to full datasets, that there are recommendations that can be made to optimize age and length collections on fishery-independent platforms.
 
-don't need so many lengths, can reduce and limit per haul to get essentially same estimates and level of uncertainty
+An unknown, but desirable outcome of research would be to specify how many length frequency collections are necessary to provide adequate information to stock assessment models.
+@Gerritsen2007 suggested that sampling rates for length frequency be 10 fish per length category based on the mean weighted coefficient of variation statistic.
+In practical implementation, their suggestion would result in species-specific sampling rates at the haul level, where larger fish would require more samples, and smaller fish would require less.
+While this is a result that makes biological sense, and is attractive as it is related to life-history characteristics of the species being sampled, it could result in logistical difficulties when implemented 'on deck' during a survey.
+We suggest, alternatively, that a more logistically feasible length frequency sampling method would be to set the same sampling rate across species at the haul level, recognizing that length frequiencies for some species may be over-sampled.
+Here, we find that limiting sampling at 100 to 150 fish within a haul (whether for total or sex-specific length composition) would provide length composition data that have relatively similar uncertainty (within 10% of ISS) compared to length composition data derived from sampling at more intense rates.
+We conclude, therefore, that there is little added benefit, in terms of reduced uncertainty, beyond sampling limits of 100 to 150 fish lengths per haul.
+This indicates as well that we are beyond a saturation point in the improvements made by any increased sampling effort in these surveys for length composition, however, this is not the case for age composition sampling.
 
+A related desirable outcome of research is to determine how many age collections are necessary to provide adequate information to stock assessments models.
+Based on the results of this analyses, we find the answer to this question to remain elusive.
+As we increased the subsampling rates for age composition there was no 'leveling off' of age composition ISS that would indicate a saturation point had been met like that which resulted for length composition ISS. 
+In fact, as the subsampling rates were increased the age composition ISS continued to increase.
+In a similar study, @Siskey2022 evaluated increasing age sampling beyond current sampling levels for a subset of stocks evaluated here using a bootstrap approach and also found that the age composition ISS continued to increase, even at levels of increasing current sampling levels by 67%.
+In order to determine whether and where age composition ISS reaches a saturation point simulation studies may be a more appropriate approach than bootstrapping historical data, as variables such as life-history or intra-haul correlation can be accounted for specifically.
+The results of our study, and ones like @Siskey2022, suggest that the number of age samples beyond which there is no improvement to age composition information are likely beyond the current management agency capacities to sample and read by ageing laboratories.
+In terms of what is necessary to provide adequate information to stock assessment models, the historical sampling levels have resulted in model outcomes that seem to have provided reasonable advice for management of North Pacific fish stocks.
+Our recommendation, therefore, is to attempt to retain historical levels of sampling for age composition, with the recognition that there are consequences to age composition uncertainty with reductions in these rates that will have downstream effects on assessment model uncertainty.
 
-gadids/atka not as sensitive to reductions in age samples as flatfish and rockfish
+Across the stocks evaluated, the decrease in length composition ISS as haul sub-sampling rates increased were extremely consistent, and no clear pattern emerged that could be related to life-history, however, there were interesting patterns that emerged when considering the effect of reduction in age sampling rates and the subsequent age composition ISS.
+Overall we found that the effect of decreasing age sampling rates was not one-to-one in relation to the rate of decrease in age composition ISS, but rather had a dampened effect.
+Although, when comparing across species types we noted that the effect of reductions in age sampling efforts was relatively larger for flatfish and rockfish as compared to gadids (and Atka mackerel).
+That is, a reduction in age sampling effort for flatfish and rockfish has a relatively larger impact on the reduction in age composition ISS as compared to gadids.
+A similar result was found in @Hulson2017, where it was found that age sample size had a relatively larger effect on the uncertainty in age composition data for rockfish, then flatfish, then gadids (including Atka mackerel).
+In terms of assessment outcome, @Siskey2022 showed that increasing or decreasing age sampling effort for the rockfish examples used had a larger subsequent effect on the uncertainty in management quantities than the gadid example, indicating that this relatively larger effect on age composition ISS translates through the assessment model as well.
+An extenuating circumstance that should be considered when evaluating the consequences of age sampling effort reduction for flatfish, is that all of the stocks included in this analysis are managed through the use of sex-specific assessment models.
+We show that, in comparison to the total (combined sex) age composition ISS the sex-specific age composition ISS is smaller, and between the two sexes there can be differences in the magnitude of ISS, often resulting in ISS that is larger for female age composition as compared to male.
+It must be noted that reductions in age sampling effort for flatfish will have further downstream effects when considering uncertainty in sex-specific age composition.
+While we encourage maintaining historical levels of age sampling effort, we additionally recommend that if reductions are to be considered in age sampling effort that decision-makers consider the unequal consequences of these reductions across species types.
 
-papers to compare to
-siskey
-the length sample size one
-some of the ICES survey reduction papers
+Para on comparison with other survey reduction work (i.e., ICES WKUSER) - Meaghan
 
+Para on sex and age sampling consequences to survey staff - Jason
 
-make a note of sex differense in iss? that females >males
-
-total lengths are cheap, sex-specific not so much
-
-consequences to:
-ISS
-assessment results
-workforce health/effort required to take samples
-
-
-
+Summary para that synthesizes all recommendations made - Pete
 
 # Acknowledgments
 
