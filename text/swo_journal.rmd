@@ -123,16 +123,15 @@ In a design-based expansion process, this is often referred to as the 'first sta
 Population abundance-at-length are computed for three sex categories (males, females, and unsexed) at the stratum level, which are then summed across strata to obtain the population abundance-at-length for the management-scale region (i.e., EBS, AI, or GOA).
 Strata are defined as regions which have similar bathymetric characterstics, in particular, depth ranges, and population abundance-at-length with strata can also be summed to any sub-region level.
 Age-length-keys (ALKs) generated from the age-length paired observations within a survey are then applied to estimated abundance-at-length to provide an estimate of abundance-at-age [e.g., @QuinnDeriso1999].
-Currently, no species age composition are estimated using depth or area stratified ALKs, rather, all observations are pooled for the entirety of the survey area each survey year. 
+Currently, no stocks age composition are estimated using depth or area stratified ALKs, rather, all observations are pooled for the entirety of the survey area each survey year. 
 The specific methods AFSC uses to expand length and age samples to abundance are shown in @Hulson2023b. 
 The stocks selected for this analysis are shown in Table \@ref(tab:species-samples)), and were selected because all are assessed by AFSC with statistical catch-at-age models and have corresponding expanded age and/or length composition estimates from the respective bottom trawl surveys. 
-Data from the recent three survey years for each survey were used in this analysis in order to show results that reflect consequences of sub-sampling that were most applicable to the current status of the stocks. 
-The average length and age sample sizes from the most recent three survey years for the species selected by survey are also shown in Table \@ref(tab:species-samples)). 
+Historical data for each survey were used in this analysis in order to show results that reflect consequences of sub-sampling. 
+To show the recent sampling magnitudes, the average length and age sample sizes from the most recent three survey years for the stocks selected by survey are shown in Table \@ref(tab:species-samples)). 
 
 ## Simulation-Bootstrap framework
 
-To evaluate the effect of reductions in sampling length frequency and age collections we developed a bootstrap-simulation framework that 1) allows for reductions in the historical number of length frequencies and age specimen data collected and 2) conducts the first (length) and second (age) stage expansion process for each bootstrap replicate of length frequency and age specimen information to generate length and age composition [*@ref - do we cite the R-package here? or the tech-memo @Hulson2023?*]. 
-We used the historical length frequency and age specimen data that were collected from the AFSC bottom trawl surveys to evaluate the impact of reduced sampling.  
+To evaluate the effect of reductions in sampling length frequency and age collections we developed a bootstrap-simulation framework that 1) allows for reductions in the historical number of length frequencies and age specimen data collected and 2) conducts the first (length) and second (age) stage expansion process for each bootstrap replicate of length frequency and age specimen information to generate length and age composition.
 The bootstrap-simulation framework is composed of a suite of nested resampling protocols. 
 Bootstrap resampling was performed either with replacement (wr) or without replacement (wor) depending on the needs of a particular protocol. 
 Functions to run the sampling protocols were developed in a compartmentalized manner to provide for substantial flexibility in exploring desired resampling protocols. 
@@ -236,9 +235,9 @@ We find, based on the proportional decrease in ISS from sub-sampled data compare
 
 An unknown, but desirable outcome of research would be to specify how many length frequency collections are necessary to provide adequate information to stock assessment models.
 @Gerritsen2007 suggested that sampling rates for length frequency be 10 fish per length category based on the mean weighted coefficient of variation statistic.
-In practical implementation, their suggestion would result in species-specific sampling rates at the haul level, where larger fish would require more samples, and smaller fish would require less.
-While this is a result that makes biological sense, and is attractive as it is related to life-history characteristics of the species being sampled, it could result in logistical difficulties when implemented 'on deck' during a survey.
-We suggest, alternatively, that a more logistically feasible length frequency sampling method would be to set the same sampling rate across species at the haul level, recognizing that length frequiencies for some species may be over-sampled.
+In practical implementation, their suggestion would result in stock-specific sampling rates at the haul level, where larger fish would require more samples, and smaller fish would require less.
+While this is a result that makes biological sense, and is attractive as it is related to life-history characteristics of the stocks being sampled, it could result in logistical difficulties when implemented 'on deck' during a survey.
+We suggest, alternatively, that a more logistically feasible length frequency sampling method would be to set the same sampling rate across stocks at the haul level, recognizing that length frequencies for some stocks may be over-sampled.
 Here, we find that limiting sampling at 100 to 150 fish within a haul (whether for total or sex-specific length composition) would provide length composition data that have relatively similar uncertainty (within 10% of ISS) compared to length composition data derived from sampling at more intense rates.
 We conclude, therefore, that there is little added benefit, in terms of reduced uncertainty, beyond sampling limits of 100 to 150 fish lengths per haul.
 This indicates as well that we are beyond a saturation point in the improvements made by any increased sampling effort in these surveys for length composition, however, this is not the case for age composition sampling.
@@ -273,6 +272,7 @@ Summary para that synthesizes all recommendations made - Pete
 # Acknowledgments
 
 We thank *reviewer1* and *reviewer2* for their helpful reviews of this manuscript. 
+All the staff who have spent time at sea and staring through microscopes to produce the data these analyses are based upon.
 
 \newpage
 
@@ -286,7 +286,7 @@ We thank *reviewer1* and *reviewer2* for their helpful reviews of this manuscrip
 
 ```{r species-samples}
 knitr::kable(vroom::vroom(here::here('tables', 'species_sample.csv')), 
-             caption = "Average length and age (shown in parentheses) samples from the most recent three AFSC bottom trawl surveys by region for the species evaluated in the bootstrap-simulation for reduction in length and age collections.", 
+             caption = "Average length and age (shown in parentheses) samples from the most recent three AFSC bottom trawl surveys by region for the stocks evaluated in the bootstrap-simulation for reduction in length and age collections.", 
              align = c('llccc'), 
              format.args = list(big.mark = ",", scientific = FALSE))
 ```
