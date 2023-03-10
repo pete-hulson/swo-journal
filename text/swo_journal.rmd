@@ -57,15 +57,12 @@ source(here::here('R', "render_toc.R"))
 
 # Abstract 
 
-*Why are you doing this? [context and aim]*
-
-*What did you do? [methods]*
-
-*What did you find? [core results – say something useful – no motherhood statements or deference to the main text!]*
-
-*What does this mean? [interpretation in context]*
-
-*What is it good for? [application]*
+Unavoidable survey effort reduction has become a reality that must be accounted for in modern stock assessment models, and in addition, increasing negative consequences to survey staff health due to repetitive motion injuries are becoming a cost to managing agencies that is increasingly significant.
+In this study, we evaluated the consequences of reductions in age and length data collections for composition data that is used in stock assessment models in order to determine if a balance can be met between reducing sampling that does not excessively increase data uncertainty but provides for reductions in repetitive motions that can cause injury to survey staff.
+We find that reducing sampling to a maximum of 100 to 150 fish sampled per haul for length (either sex-specific or combined sex) provides for length composition data for which the uncertainty is not appreciably increased, and has no effect on the uncertainty in age composition data that is subsequently expanded from this sub-sampled length frequency data.
+We find that as the subsampling rate of total age collections is increased, the uncertainty in the age composition also increases, but not at a rate proportional to the reduction in sampling effort.
+While there is a direct link between the uncertainty in data inputs and the uncertainty of assessment model predictions, reductions in length frequency sampling can be made without large consequence, but there will be, at some level, consequence to model output with reductions in age collection sampling.
+The method employed here, and the results presented, can aid managing agencies in balancing the magnitude of data collection on fishery-independent survey platforms and subsequent consequences to assessment models.
 
 \newpage
 
