@@ -1,5 +1,5 @@
 ---
-title: "Effort optimization of bottom trawl subsampling of fish for length and age composition: tradeoffs between stock assessment input sample size and survey workforce health and efficiency"
+title: "Effort optimization of bottom trawl subsampling of fish for length and age composition: tradeoffs between stock assessment input sample size and survey workforce health and efficiency -or- Reductions in sampling effort for fishery-independent age and length composition: balancing stock assessment input data uncertainty and workforce health and efficiency"
 
 author:
   - name: Pete Hulson
@@ -227,52 +227,69 @@ Regardless, for all stocks and sex categories evaluated, the reduction in ISS wa
 
 # Discussion
 
-In this study, we developed a method to evaluate the consequences of reduced sampling effort on uncertainty in age and length composition data and demonstrated the proportional decrease in the ISS of reduced sampling datasets.
+In this study, we developed a method to evaluate the consequences of reduced sampling effort on uncertainty in age and length composition data and demonstrated the proportional decrease in the ISS due to reductions in sampling.
 We found that the ISS for age composition data was more sensitive to reductions in sampling effort than the ISS for length composition.
 While the age composition ISS was sensitive to reductions in age sampling effort, we also show that the ISS for age composition was unaffected by the level of sub-sampling in the length frequency collections.
 Looking across multiple survey regions revealed that these reductions in ISS, or increase in uncertainty, of length and age composition were stock specific, but generally consistent.
-We find, based on the proportional decrease in ISS from sub-sampled data compared to full datasets, that there are recommendations that can be made to optimize age and length collections on fishery-independent platforms.
+We find, based on the proportional decrease in ISS from sub-sampled data compared to full datasets, that there are recommendations that can be made to balance age and length collections on fishery-independent platforms with considerations of the amount of effort required to obtain these collections.
 
 An unknown, but desirable outcome of research would be to specify how many length frequency collections are necessary to provide adequate information to stock assessment models.
 @Gerritsen2007 suggested that sampling rates for length frequency be 10 fish per length category based on the mean weighted coefficient of variation statistic.
 In practical implementation, their suggestion would result in stock-specific sampling rates at the haul level, where larger fish would require more samples, and smaller fish would require less.
 While this is a result that makes biological sense, and is attractive as it is related to life-history characteristics of the stocks being sampled, it could result in logistical difficulties when implemented 'on deck' during a survey.
 We suggest, alternatively, that a more logistically feasible length frequency sampling method would be to set the same sampling rate across stocks at the haul level, recognizing that length frequencies for some stocks may be over-sampled.
-Here, we find that limiting sampling at 100 to 150 fish within a haul (whether for total or sex-specific length composition) would provide length composition data that have relatively similar uncertainty (within 10% of ISS) compared to length composition data derived from sampling at more intense rates.
+Here, we find that limiting sampling at 100 to 150 fish within a haul (whether for total or sex-specific length composition) would provide length composition data that have relatively similar uncertainty compared to length composition data derived from sampling at more intense rates (within 10% of the full dataset length composition ISS).
 We conclude, therefore, that there is little added benefit, in terms of reduced uncertainty, beyond sampling limits of 100 to 150 fish lengths per haul.
-This indicates as well that we are beyond a saturation point in the improvements made by any increased sampling effort in these surveys for length composition, however, this is not the case for age composition sampling.
+This indicates as well that we are beyond a saturation point, or a point of diminishing returns in the improvements made by any increased sampling effort in these surveys for length composition, however, this is not the case for age composition sampling.
 
 A related desirable outcome of research is to determine how many age collections are necessary to provide adequate information to stock assessments models.
 Based on the results of this analyses, we find the answer to this question to remain elusive.
-As we increased the subsampling rates for age composition there was no 'leveling off' of age composition ISS that would indicate a saturation point had been met like that which resulted for length composition ISS. 
+As we increased the subsampling rates for age composition there was no 'leveling off' of age composition ISS that would indicate a point of dimisnishing returns had been met like that which resulted for length composition ISS. 
 In fact, as the subsampling rates were increased the age composition ISS continued to increase.
 In a similar study, @Siskey2022 evaluated increasing age sampling beyond current sampling levels for a subset of stocks evaluated here using a bootstrap approach and also found that the age composition ISS continued to increase, even at levels of increasing current sampling levels by 67%.
-In order to determine whether and where age composition ISS reaches a saturation point simulation studies may be a more appropriate approach than bootstrapping historical data, as variables such as life-history or intra-haul correlation can be accounted for specifically.
+In order to determine whether and where age composition ISS reaches a point of diminishing returns simulation studies may be a more appropriate approach than bootstrapping historical data, as variables such as life-history or intra-haul correlation can be accounted for specifically [e.g., similar to @Hulson2011; @Xu2020].
 The results of our study, and ones like @Siskey2022, suggest that the number of age samples beyond which there is no improvement to age composition information are likely beyond the current management agency capacities to sample and read by ageing laboratories.
 In terms of what is necessary to provide adequate information to stock assessment models, the historical sampling levels have resulted in model outcomes that seem to have provided reasonable advice for management of North Pacific fish stocks.
 Our recommendation, therefore, is to attempt to retain historical levels of sampling for age composition, with the recognition that there are consequences to age composition uncertainty with reductions in these rates that will have downstream effects on assessment model uncertainty.
 
-Across the stocks evaluated, the decrease in length composition ISS as haul sub-sampling rates increased were extremely consistent, and no clear pattern emerged that could be related to life-history, however, there were interesting patterns that emerged when considering the effect of reduction in age sampling rates and the subsequent age composition ISS.
+Across the stocks evaluated, the decrease in length composition ISS as haul sub-sampling rates increased were extremely consistent, and no clear pattern emerged that seemed to be related to life-history, however, there were interesting species type patterns that emerged when considering the effect of reduction in age sampling rates and the subsequent age composition ISS.
 Overall we found that the effect of decreasing age sampling rates was not one-to-one in relation to the rate of decrease in age composition ISS, but rather had a dampened effect.
+For example, a 10% reduction in age sampling effort did not result in a 10% reduction in age composition ISS, but rather a 5-8% reduction, depending on the stock.
 Although, when comparing across species types we noted that the effect of reductions in age sampling efforts was relatively larger for flatfish and rockfish as compared to gadids (and Atka mackerel).
 That is, a reduction in age sampling effort for flatfish and rockfish has a relatively larger impact on the reduction in age composition ISS as compared to gadids.
-A similar result was found in @Hulson2017, where it was found that age sample size had a relatively larger effect on the uncertainty in age composition data for rockfish, then flatfish, then gadids (including Atka mackerel).
+A similar result occurred in @Hulson2017, where it was found that age sample size had a relatively larger effect on the uncertainty in age composition data for rockfish, then flatfish, then gadids (including Atka mackerel).
 In terms of assessment outcome, @Siskey2022 showed that increasing or decreasing age sampling effort for the rockfish examples used had a larger subsequent effect on the uncertainty in management quantities than the gadid example, indicating that this relatively larger effect on age composition ISS translates through the assessment model as well.
 An extenuating circumstance that should be considered when evaluating the consequences of age sampling effort reduction for flatfish, is that all of the stocks included in this analysis are managed through the use of sex-specific assessment models.
-We show that, in comparison to the total (combined sex) age composition ISS the sex-specific age composition ISS is smaller, and between the two sexes there can be differences in the magnitude of ISS, often resulting in ISS that is larger for female age composition as compared to male.
+We show that, in comparison to the total (combined sex) age (and length) composition ISS the sex-specific age (and length) composition ISS is smaller, and between the two sexes there can be differences in the magnitude of ISS, often resulting in ISS that is larger for female age composition as compared to male.
 It must be noted that reductions in age sampling effort for flatfish will have further downstream effects when considering uncertainty in sex-specific age composition.
 While we encourage maintaining historical levels of age sampling effort, we additionally recommend that if reductions are to be considered in age sampling effort that decision-makers consider the unequal consequences of these reductions across species types.
 
-Para on comparison with other survey reduction work (i.e., ICES WKUSER) - Meaghan
+Recently, a large amount of effort has been dedicated to evaluating the consequences of reductions in survey effort [@ICES2020; @ICES2023].
+The results of this analysis fits with previous work...
+*Meaghan, Jason, and Matt - I think all of you have been involved with WKUSER, could you add some text here to compare what we've done with what was done in the WKUSER workshops, maybe focusing on whether any work was done focusing on comp data?*
 
-Para on sex and age sampling consequences to survey staff - Jason
+While the focus of the analysis in this study was to evaluate the statistical consequences of effort reduction when collecting age and length samples, our stated goal was to speak to the balance between stock assessment input data uncertainty and workforce health and efficiency.
+We show that the length frequency sampling can be reduced from current sampling levels without major consequences to length composition uncertainty, this was true for both total (combined sex) and sex-specific data.
+While collecting total length frequency data is cheap, in terms of effort required to collect only the length from a fish, determining sex from a fish requires additional effort.
+*Jason - could you add a couple of sentences here with more detail from the 'on-deck' perspective?*
 
-Summary para that synthesizes all recommendations made - Pete
+When collecting age samples the additional effort that is required beyond determining the sex of a fish involves removing the sagittal otoliths which is then sent for subsequent reading to an age reading laboratory.
+Thus, for age sampling there is additional effort beyond 'on-deck' sampling that is required by a managing agency.
+The cost for several stocks evaluated here is summarized in @Lambert2017 and further evaluated in @Siskey2022, which show that the monetary expense of each otolith is not inconsequential and the savings to an agency upon reducing age sampling could be in the tens of thousands of dollars (USD).
+However, @Siskey2022 showed that there are downstream effects of increased uncertainty in assessment model estimates of the Over Fishing Level when age sampling is reduced.
+While buffers in catch limits due to assessment model uncertainty [e.g., @Prager2003] are not yet incorporated in North Pacific fishery stock assessments, such buffers that would reduce catch limits based on increased uncertainty in assessment model quantities that are from increased uncertainty in age composition data due to reduced sampling would have direct effects on the value of the fisheries targeting these stocks.
+*Matt - anything to add from your paper?*
+*Jason - could you speak to the balance with workforce health here?*
+
+Overall, we demonstrate a method from which a balance can be evaluated between stock assessment needs and workforce health and efficiency.
+Similar to what was done here, we recommend that fishery-independent survey groups collaborate with stock assessment scientists to determine if efficiency can be improved for age and length collections, here we found that improved efficiency could be obtained by reducing the amount of length frequency data (both total and sex-specific) on a haul-level basis.
+Future work to evaluate the consequences of reducing, or increasing, composition data collections should include developing simulation methods that can directly evaluate variables such as life-history characteristics and intra-haul correlation levels.
 
 # Acknowledgments
 
 We thank *reviewer1* and *reviewer2* for their helpful reviews of this manuscript. 
-All the staff who have spent time at sea and staring through microscopes to produce the data these analyses are based upon.
+We thank the remaining members of the AFSC Survey Workload Optimization Working Group for there contributions to this work: William T. Stockhausen, Susanne F. McDermott and W. Chris Long.
+We express our deep gratitude to all the AFSC staff who have spent time at sea and staring through microscopes to produce the data these analyses are based upon.
 
 \newpage
 
