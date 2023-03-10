@@ -58,8 +58,8 @@ source(here::here('R', "render_toc.R"))
 # Abstract 
 
 Unavoidable survey effort reduction has become a reality that must be accounted for in modern stock assessment models, and in addition, increasing negative consequences to survey staff health due to repetitive motion injuries are becoming a cost to managing agencies that is increasingly significant.
-In this study, we evaluated the consequences of reductions in age and length data collections for composition data that is used in stock assessment models in order to determine if a balance can be met between reducing sampling that does not excessively increase data uncertainty but provides for reductions in repetitive motions that can cause injury to survey staff.
-We find that reducing sampling to a maximum of 100 to 150 fish sampled per haul for length (either sex-specific or combined sex) provides for length composition data for which the uncertainty is not appreciably increased, and has no effect on the uncertainty in age composition data that is subsequently expanded from this sub-sampled length frequency data.
+In this study, we evaluated the consequences of reductions in age and length data collections for composition data that is used in stock assessment models in order to determine if a balance can be met between reducing sampling that does not excessively increase data uncertainty while providing for reductions in repetitive motions that can cause injury to survey staff.
+We find that reducing sampling to a maximum of 100 to 150 fish sampled per haul for length (either sex-specific or combined sex) provides length composition data for which the uncertainty is not appreciably increased, and has no effect on the uncertainty in age composition data that is subsequently expanded from this sub-sampled length frequency data.
 We find that as the subsampling rate of total age collections is increased, the uncertainty in the age composition also increases, but not at a rate proportional to the reduction in sampling effort.
 While there is a direct link between the uncertainty in data inputs and the uncertainty of assessment model predictions, reductions in length frequency sampling can be made without large consequence, but there will be, at some level, consequence to model output with reductions in age collection sampling.
 The method employed here, and the results presented, can aid managing agencies in balancing the magnitude of data collection on fishery-independent survey platforms and subsequent consequences to assessment models.
@@ -85,6 +85,7 @@ Within a fishery-independent survey, thousands of samples are obtained for both 
 For example, the National Oceanic and Atmospheric Administration’s (NOAA’s) Alaska Fisheries Science Center (AFSC) is responsible for the execution of several fisheries-independent bottom trawl surveys [@Stauffer2004], spanning most of the continental shelf in Alaskan waters south of the Bering Strait, including the eastern Bering Sea (EBS), the Aleutian Islands (AI), and the Gulf of Alaska (GOA).
 The quantitative time series of comprehensively cataloging the biota encountered at each sampling station within these surveys began in 1982 with the adoption of standardized trawling protocols [@Lauth2019], but trawl observations were made as early as 1955 [@Zimmermann2009].
 Within the quantitative time series, AFSC scientists have routinely collected observations of fish length and age composition, consisting of complete or random subsamples of fish within each trawl.
+
 There are a number of unintended consequences associated with intense sampling of species within a fishery-independent survey.
 The length measurement process is repeated over hundreds of thousands of times in a given survey each year, while collecting otoliths is repeated several thousands of times, representing a daunting amount of work for the field scientists working on research vessels.
 Further, a large portion of the length frequency data that is collected is subsequently sampled for sex determinations in order to support stock assessments that are sex-specific, which involves a substantial increase in handling and data collection effort.
@@ -120,11 +121,11 @@ In a design-based expansion process, this is often referred to as the 'first sta
 Population abundance-at-length are computed for three sex categories (males, females, and unsexed) at the stratum level, which are then summed across strata to obtain the population abundance-at-length for the management-scale region (i.e., EBS, AI, or GOA).
 Strata are defined as regions which have similar bathymetric characterstics, in particular, depth ranges, and population abundance-at-length with strata can also be summed to any sub-region level.
 Age-length-keys (ALKs) generated from the age-length paired observations within a survey are then applied to estimated abundance-at-length to provide an estimate of abundance-at-age [e.g., @QuinnDeriso1999].
-Currently, no stocks age composition are estimated using depth or area stratified ALKs, rather, all observations are pooled for the entirety of the survey area each survey year. 
 The specific methods AFSC uses to expand length and age samples to abundance are shown in @Hulson2023b. 
-The stocks selected for this analysis are shown in Table \@ref(tab:species-samples)), and were selected because all are assessed by AFSC with statistical catch-at-age models and have corresponding expanded age and/or length composition estimates from the respective bottom trawl surveys. 
+
+The stocks selected for this analysis are shown in Table \@ref(tab:species-samples), and were selected because all are assessed by AFSC with statistical catch-at-age models and have corresponding expanded age and/or length composition estimates from the respective bottom trawl surveys. 
 Historical data for each survey were used in this analysis in order to show results that reflect consequences of sub-sampling. 
-To show the recent sampling magnitudes, the average length and age sample sizes from the most recent three survey years for the stocks selected by survey are shown in Table \@ref(tab:species-samples)). 
+To show the recent sampling magnitudes, the average length and age sample sizes from the most recent three survey years for the stocks selected by survey are shown in Table \@ref(tab:species-samples). 
 
 ## Simulation-Bootstrap framework
 
@@ -152,7 +153,7 @@ The bootstrap-simulation then repeated steps 1-7 iteratively for each length and
 The length subsample levels that we evaluated from the historical length frequency collections were 50, 100, 150, 200, and 250 samples per haul. 
 The age subsample levels that we evaluated from the historical age specimen collections were 25%, 50%, 75%, and 90% of the total number of ages collected in any given survey year. 
 We also ran the bootstrap-simulation for the historical number of length frequency and age specimen collections without subsetting in order to compare the base level uncertainty to the increase in uncertainty gained through sub-sampling. 
-We ran the bootstrap-simulation for 500 iterations, which was a level for which the variability in population abundance at length results had stabilized. 
+We ran the bootstrap-simulation for 500 iterations, which was a level for which the variability in  results had stabilized. 
 The bootstrap-simulation was developed in R [@Rcore] and is available via GitHub as an R package (https://github.com/BenWilliams-NOAA/swo).
 
 ## Computing effective and input sample size
@@ -241,7 +242,7 @@ This indicates as well that we are beyond a saturation point, or a point of dimi
 
 A related desirable outcome of research is to determine how many age collections are necessary to provide adequate information to stock assessments models.
 Based on the results of this analyses, we find the answer to this question to remain elusive.
-As we increased the subsampling rates for age composition there was no 'leveling off' of age composition ISS that would indicate a point of dimisnishing returns had been met like that which resulted for length composition ISS. 
+As we increased the subsampling rates for age composition there was no 'leveling off' of age composition ISS that would indicate a point of diminishing returns had been met like that which resulted for length composition ISS. 
 In fact, as the subsampling rates were increased the age composition ISS continued to increase.
 In a similar study, @Siskey2022 evaluated increasing age sampling beyond current sampling levels for a subset of stocks evaluated here using a bootstrap approach and also found that the age composition ISS continued to increase, even at levels of increasing current sampling levels by 67%.
 In order to determine whether and where age composition ISS reaches a point of diminishing returns simulation studies may be a more appropriate approach than bootstrapping historical data, as variables such as life-history or intra-haul correlation can be accounted for specifically [e.g., similar to @Hulson2011; @Xu2020].
