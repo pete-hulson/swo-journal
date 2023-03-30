@@ -1,25 +1,25 @@
 ---
-title: "Effort optimization of bottom trawl subsampling of fish for length and age composition: tradeoffs between stock assessment input sample size and survey workforce health and efficiency -or- Reductions in sampling effort for fishery-independent age and length composition: balancing stock assessment input data uncertainty and workforce health and efficiency"
+title: "Reductions in sampling effort for fishery-independent age and length composition: balancing stock assessment input data uncertainty and workforce health and efficiency"
 
 author:
-  - name: Pete Hulson
+  - name: Peter-John F. Hulson
     institute: afscjnu
     email: pete.hulson@noaa.gov
     correspondence: true
-  - name: Benjamin Williams
+  - name: Benjamin C. Williams
     institute: afscjnu    
-  - name: Meaghan Bryan
+  - name: Meaghan D. Bryan
     institute: afscsearefm
   - name: Jason Conner
     institute: afscsearace
-  - name: Matthew Siskey
-    institute: uw
+  - name: Matthew R. Siskey
+    institute: wdfw
 
 institute:
   - afscjnu: Auke Bay Laboratories, Alaska Fisheries Science Center, National Marine Fisheries Service, National Oceanic and Atmospheric Administration, 17109 Point Lena Loop Rd., Juneau, AK 99801
   - afscsearefm: Resource Ecology and Fisheries Management Division, Alaska Fisheries Science Center, National Marine Fisheries Service, National Oceanic and Atmospheric Administration, 7600 Sand Point Way NE, Seattle, WA 98115
   - afscsearace: Resource Assessment and Conservation Engineering Division, Alaska Fisheries Science Center, National Marine Fisheries Service, National Oceanic and Atmospheric Administration, 7600 Sand Point Way NE, Seattle, WA 98115
-  - uw: School of Aquatic and Fishery Sciences, University of Washington, Seattle, WA, USA
+  - wdfw: Washington Department of Fish and Wildlife, 111 Washington St. SE, Olympia, WA, 98501
 
 
 output:
@@ -57,12 +57,15 @@ source(here::here('R', "render_toc.R"))
 
 # Abstract 
 
-Unavoidable survey effort reduction has become a reality that must be accounted for in modern stock assessment models, and in addition, increasing negative consequences to survey staff health due to repetitive motion injuries are becoming a cost to managing agencies that is increasingly significant.
-In this study, we evaluated the consequences of reductions in age and length data collections for composition data that is used in stock assessment models in order to determine if a balance can be met between reducing sampling that does not excessively increase data uncertainty while providing for reductions in repetitive motions that can cause injury to survey staff.
-We find that reducing sampling to a maximum of 100 to 150 fish sampled per haul for length (either sex-specific or combined sex) provides length composition data for which the uncertainty is not appreciably increased, and has no effect on the uncertainty in age composition data that is subsequently expanded from this sub-sampled length frequency data.
-We find that as the subsampling rate of total age collections is increased, the uncertainty in the age composition also increases, but not at a rate proportional to the reduction in sampling effort.
-While there is a direct link between the uncertainty in data inputs and the uncertainty of assessment model predictions, reductions in length frequency sampling can be made without large consequence, but there will be, at some level, consequence to model output with reductions in age collection sampling.
-The method employed here, and the results presented, can aid managing agencies in balancing the magnitude of data collection on fishery-independent survey platforms and subsequent consequences to assessment models.
+Unavoidable survey effort reduction has become a reality that must be accounted for in modern stock assessment models. 
+In addition, increasing negative consequences to survey staff health due to repetitive motion injuries are becoming a cost to managing agencies that is increasingly significant.
+In this study, we evaluated the consequences of reductions in age and length data collections for composition data that are used in stock assessment models.
+The main goal was to determine if sampling can be reduced to a level that does not excessively increase data uncertainty yet provides a reduction in repetitive motions that can cause injury to survey staff.
+We found that reducing length sampling to a maximum of 100 to 150 fish sampled per haul (either sex-specific or combined sex) provides length composition data for which the uncertainty is not appreciably increased, and has no effect on the uncertainty in age composition data that is subsequently expanded from this sub-sampled length frequency data.
+We also found that as the subsampling rate of total age collections is increased, the uncertainty in the age composition also increases, but not at a rate proportional to the reduction in sampling effort.
+While there is a direct link between the uncertainty in data inputs and the uncertainty of assessment model predictions, reductions in length frequency sampling can be made without large consequences.
+Conversely, there will be, at some level, consequences to model output with reductions in age collection sampling.
+The method employed here, and the results presented, can aid managing agencies to balance the magnitude of data collection on fishery-independent survey platforms and subsequent consequences to assessment models.
 
 \newpage
 
