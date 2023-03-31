@@ -118,79 +118,80 @@ and 4) are there species specific characteristics that mitigate, or exaggerate, 
 ## Computing length and age composition from bottom trawl survey data
 
 Data collection for each AFSC groundfish bottom trawl survey is described in respective NOAA Technical Memorandums [EBS: @Lauth2019; AI: @vonSzalay2017; GOA: @vonSzalay2018]. 
-Fundamental methods of length sample collection are generally synchronized between these surveys, with species-specific exceptions for minimum length sub-sample size. 
-Observations of sex-specific length distributions for designated species encountered within a catch sample are collected by 1) sorting the trawl sample by species, 2) weighing each species in aggregate, 3) obtaining a random sub-sample of target sample size, 4) sorting the sub-sample by sex (each fish is cut with a scalpel, gonads are identified and placed in a sex-specific receptacle), and 5) measuring and recording each fish length (each fish is placed on a measuring board, length is identified and the species, sex and measurement are recorded on a computer). 
-To facilitate age estimation, individual fish are processed at sea to record sex, length and weight and to remove sagittal otoliths that are returned the AFSC Age and Growth laboratory for age determination.
-Survey age sampling protocols are specific by fish species and follow 1 of 2 paradigms: 1) a stratified collection that is distributed over both the spatial frame of the stratification scheme and the expected size range of a species; or 2) a small subsample (3-6 fish, depending on species) collected randomly per trawl. 
-The protocol for some species has changed over the time series, which has followed a trend of transitioning from protocol 1) to protocol 2). 
+The fundamental methods of length sample collection are generally synchronized between these surveys, with species-specific exceptions for minimum length sub-sample size. 
+Species and sex-specific length distributions within a catch sample are collected by 1) sorting the sample by species, 2) weighing each species in aggregate, 3) obtaining a random sub-sample of a target sample size, 4) sorting the sub-sample by sex (each fish is incised to visually determine sex), and 5) measuring length and recording each fish's measurements into a database. 
+Additionally, a subsample of fish are processed at sea to collect their sex, length, weight, and sagittal otoliths. 
+These otoliths are returned to the AFSC Age and Growth laboratory for age determination.
+Survey age sampling protocols are species specific and follow 1 of 2 paradigms: 1) a stratified collection distributed over both the spatial frame of the stratification scheme and the expected size range of a species; or 2) a small subsample (3-6 fish, species dependent) collected randomly per trawl. 
+The protocol for some species has changed over the time series, generally following a trend of transitioning from protocol 1) to protocol 2). 
 
-Length frequency samples collected by the AFSC bottom trawl surveys are expanded by area-swept type catch-per-unit-effort (CPUE) and stratum area to obtain estimates of population abundance-at-length (i.e., design-based expansion).
+Length frequency samples collected by the AFSC bottom trawl surveys are expanded by area-swept catch-per-unit-effort (CPUE) and stratum area to obtain estimates of population abundance-at-length (i.e., design-based expansion).
 In a design-based expansion process, this is often referred to as the 'first stage expansion' and is a common method to obtain population estimates at length from area-swept survey data [@Ailloud2019; @Miller2006].
 Population abundance-at-length are computed for three sex categories (males, females, and unsexed) at the stratum level, which are then summed across strata to obtain the population abundance-at-length for the management-scale region (i.e., EBS, AI, or GOA).
-Strata are defined as regions which have similar bathymetric characterstics, in particular, depth ranges, and population abundance-at-length with strata can also be summed to any sub-region level.
+Strata are defined as regions with similar bathymetric characteristics (e.g., depth ranges), and population abundance-at-length within strata can also be summed to any sub-region level.
 Age-length-keys (ALKs) generated from the age-length paired observations within a survey are then applied to estimated abundance-at-length to provide an estimate of abundance-at-age [e.g., @QuinnDeriso1999].
 The specific methods AFSC uses to expand length and age samples to abundance are shown in @Hulson2023b. 
 
-The stocks selected for this analysis are shown in Table \@ref(tab:species-samples), and were selected because all are assessed by AFSC with statistical catch-at-age models and have corresponding expanded age and/or length composition estimates from the respective bottom trawl surveys. 
+The stocks selected for this analysis are shown in Table \@ref(tab:species-samples) and were selected because all are assessed by AFSC with statistical catch-at-age models and have corresponding expanded age and/or length composition estimates from the respective bottom trawl surveys. 
 Historical data for each survey were used in this analysis in order to show results that reflect consequences of sub-sampling. 
-To show the recent sampling magnitudes, the average length and age sample sizes from the most recent three survey years for the stocks selected by survey are shown in Table \@ref(tab:species-samples). 
+To show the recent sampling magnitudes, the average length and age sample sizes from the most recent three survey years for the stocks selected are shown in Table \@ref(tab:species-samples). 
 
 ## Simulation-Bootstrap framework
 
-To evaluate the effect of reductions in sampling length frequency and age collections we developed a bootstrap-simulation framework that 1) allows for reductions in the historical number of length frequencies and age specimen data collected and 2) conducts the first (length) and second (age) stage expansion process for each bootstrap replicate of length frequency and age specimen information to generate length and age composition.
+To evaluate the effect of reductions in sampling length frequency and specimen age data we developed a bootstrap-simulation framework that 1) allows for reductions in the historical number of length frequencies and specimen age data collected and 2) performs first (length) and second (age) stage expansion processes for each bootstrap replicate of length frequency and specimen age data to generate length and age compositions.
 The bootstrap-simulation framework is composed of a suite of nested resampling protocols. 
 Bootstrap resampling was performed either with replacement (wr) or without replacement (wor) depending on the needs of a particular protocol. 
-Functions to run the sampling protocols were developed in a compartmentalized manner to provide for substantial flexibility in exploring desired resampling protocols. 
+Functions to run the sampling protocols were developed in a compartmentalized manner to provide substantial flexibility in exploring desired resampling protocols. 
 The order of operations (Figure \@ref(fig:bs-flows) *ben - could we add in a part that sub-samples ages too to this figure?*) has the following schedule:
 
-1. Resample hauls (wr) from the set of hauls with associated catch per unit effort (in numbers). 
-2. Within the resampled hauls from step 1, resample the observed lengths (wr).
-3. From the resampled lengths in step 2, within each haul subset the lengths (wor) at pre-determined subsampling level.
-4. With the resampled and subsampled lenth frequency data in step 3, calculate sex-specific population abundance-at-length.
+1. Resample hauls (wr) with associated catch per unit effort (in numbers). 
+2. Within the resampled hauls from step 1, resample haul-specific observed lengths (wr).
+3. From the resampled lengths in step 2, subset the haul-specific length samples (wor) at the pre-determined subsampling level.
+4. With the resampled and subsampled length frequency data in step 3, calculate sex-specific population abundance-at-length.
 5. Within the resampled hauls from step 1, resample the observed ages (wr).
-6. From the resampled ages in step 5, for the total ages sampled across hauls subset the ages (wor) at pre-determined subsampling level.
+6. From the resampled ages in step 5, subset the total ages sampled (wor) at pre-determined subsampling level.
 7. With the resampled and subsampled age data in step 6 and the sex-specific population abundance-at-length in step 4, calculate sex-specific population abundance-at-age.
 
-The core of the bootstrap-simulation function (steps 3 and 6 above) is designed to explore reductions in the sample size of lengths that are collected on a per haul basis, as well as in the aggregated sample size for ages. 
-In this bootstrap-simulation, the number of lengths (whether total or sex-specific) in a given haul must be less than or equal to the desired sample size *x* determined in step 2. 
-In step 3, when the number of resampled lengths from step 2 in a haul $n_l$ is less than *x* then $n_l$ is used directly, if $n_l>x$ then a random draw of lengths is taken without replacement in step 3. 
-We set the subsampling level for length frequency at numbers per haul in order to evaluate the consequences of reductions in length sampling at the haul level. 
-Alternatively, to subsample ages we set the proportion of the total number of ages sampled in step 6 in order to evaluate the consequences of reductions in overall age sampling, as by design at the per haul bases there are a small number of ages sampled. 
-The bootstrap-simulation then repeated steps 1-7 iteratively for each length and age subsample level, providing iterated population abundance-at-length and age that was then compared to the historical (the full sample without any resampling of data) population abundance-at-length and age determined by the bottom trawl surveys.
+The core of the bootstrap-simulation function (steps 3 and 6 above) is designed to explore reductions in the sample size of lengths collected on a per haul basis, as well as in the total sample size for ages (aggregated across hauls). 
+In step 3 of this bootstrap-simulation, the pre-determined subsampling level for lengths (whether total or sex-specific, $n_l$) in a given haul must be less than or equal to the sample size *x* collected in the historical data for that haul. 
+When the pre-determined subsampling level for lengths in a haul $n_l$ is less than the historical sample size *x* for that haul then a random draw of $n_l$ from the resampled lengths in step 2 is taken without replacement, if $n_l>x$ then the resampled lengths of size *x* in step 2 is used directly. 
+We set the subsampling level for length frequency at numbers per haul in order to evaluate the AFSC length sampling design. 
+Additionally, to subsample ages we changed the proportion of the total number of ages sampled in step 6 to evaluate the consequences of reductions in overall age sampling, because the number of otoliths collected per haul for age analysis is typically small. 
+The bootstrap-simulation repeated steps 1-7 iteratively for each length and age subsample level, providing iterated population abundance-at-length and age that was then compared to the population abundance-at-length and age calculated from the original data.
 
-The length subsample levels that we evaluated from the historical length frequency collections were 50, 100, 150, 200, and 250 samples per haul. 
-The age subsample levels that we evaluated from the historical age specimen collections were 25%, 50%, 75%, and 90% of the total number of ages collected in any given survey year. 
-We also ran the bootstrap-simulation for the historical number of length frequency and age specimen collections without subsetting in order to compare the base level uncertainty to the increase in uncertainty gained through sub-sampling. 
-We ran the bootstrap-simulation for 500 iterations, which was a level for which the variability in  results had stabilized. 
+The length subsample levels that we evaluated from the full length frequency collections were 50, 100, 150, 200, and 250 samples per haul. 
+The age subsample levels that we evaluated from the full age specimen collections were 25%, 50%, 75%, and 90% of the total number of ages collected in any given survey year. 
+We also ran the bootstrap-simulation for the full number of length frequency and age specimen collections without subsetting to compare the base level uncertainty to the uncertainty observed as a result of sub-sampling. 
+We ran the bootstrap-simulation for 500 iterations, which was a level beyond which variability in  results did not increase. 
 The bootstrap-simulation was developed in R [@Rcore] and is available via GitHub as an R package (https://github.com/BenWilliams-NOAA/swo).
 
 ## Computing effective and input sample size
 
-We used two performance metrics to quantify potential changes in uncertainty of length and age compositions (i.e., population abundance-at-length and age) owing to reduced sampling of length frequency and age specimen information.
-First, effective sample size was used to compare each bootstrap replicate of length and age composition to the original length and age composition calculated from the complete historical dataset.
-Second, input sample size was used to summarize uncertainty across bootstrap replicates as the harmonic mean of effective sample size replicates.
+We used two performance metrics to quantify potential changes in uncertainty of length and age compositions (i.e., population abundance-at-length and age) owing to reduced sampling of length frequency and/or specimen age information.
+First, effective sample size was used to compare each bootstrap replicate of length and age composition to the historically observed length and age composition.
+Second, uncertainty across bootstrap replicates was summarized using the harmonic mean of effective sample size replicates to generate an "input sample size".
 
-Effective sample size, as introduced by @Mcallister1997, is a statistic that can evaluate the level of intra-haul correlation in composition samples that are collected on a survey (whether from age or length frequency collections). 
+Effective sample size, as introduced by @Mcallister1997, is a statistic that can evaluate the level of intra-haul correlation in composition samples (whether from age or length frequency collections). 
 It is also a statistic that can evaluate the amount of uncertainty in an estimated composition compared to an observed composition. 
 Effective sample size is given by:
 
 \begin{equation}
- ESS=\frac{\sum_{c=1}^{C}E_c(1-E_c)}{\sum_{c=1}^{C}(E_c-O_c)^2}
+ ESS_{i,y}=\frac{\sum_{c=1}^{C}E_{c,i,y}(1-E_{c,i,y})}{\sum_{c=1}^{C}(E_{c,i,y}-O_{c,y})^2}
  (\#eq:eqn1)
 \end{equation}
 
-where $E_c$ is the estimated proportion for category-*c* (which can be either age or length or any other arbitrary category across which proportions are computed) and $O_c$ is the observed proportion.
-It can be interpreted by a higher ESS indicates less uncertainty in the composition estimates, while lower ESS indicates more uncertainty. 
+where $E_{c,i,y}$ is the estimated proportion for category-*c* (which can be either age or length or any other arbitrary category across which proportions are computed) in interation-*i* and year-*y* and $O_{c,y}$ is the historically observed proportion in year-*y*.
+A larger ESS indicates higher certainty in the composition estimates, while lower ESS indicates less certainty. 
 
-In this bootstrap-simulation the underlying length and age composition derived from the historical bottom trawl surveys was treated as the observed proportions $O_c$ in equation \@ref(eq:eqn1). 
-For each iteration of the bootstrap simulation for a determined sub-sample size or proportion we computed an estimated proportion ($E_c$) that was then compared to the underlying historical sex-specific length and age composition (the effective sample size for the total length and age composition, as the sum of population abundance at length, was also computed). 
-Thus, across each iteration of the bootstrap simulation we computed an effective sample size that indicated the amount of increased uncertainty that was caused by sub-sampling length frequency and age specimen data. 
-To summarize effective sample size across iterations we used the harmonic mean, which has been shown to reduce bias in recovering the true sample size in simulations for a multinomial distribution. 
-Due to this reduction in bias the harmonic mean has also been recommended to determine the ‘input sample size’ that is used in stock assessment models to fit compositional data [@Stewart2014]. 
-Herein, when we use the term ‘iterated effective sample size’ (iterated ESS) we are referring to the effective sample sizes that were computed for each iteration of the bootstrap-simulation, when we use the term ‘input sample size’ (ISS) we are referring to the harmonic mean of the iterated effective sample sizes. 
-Here we show both results of the annual ISS estimates and the proportion of of the full sample ISS for each sub-sampling case evaluated for either age or length composition sampling.
-The proportion of full sample ISS was computed by pairing ISS as computed for the full dataset (with no sub-sampling) and the ISS for the dataset at the pre-determined sub-sampling level, and then divide the sub-sampled data ISS by the full dataset ISS for each survey year.
-This provides the proportion, or percent, of the full dataset ISS for the ISS at the sub-sampling level evaluated, which gives an indication of the amount of uncertainty that was increased by sub-sampling.
+In this bootstrap-simulation the length and age compositions derived from the historical bottom trawl surveys' full datasets were treated as the observed proportions $O_c$ in equation \@ref(eq:eqn1). 
+For each iteration of the bootstrap simulation for a pre-specified sub-sampling level we computed an estimated proportion ($E_c$) that was then compared to this observed sex-specific (and sex-aggregated total) length and age composition. 
+Thus, across each iteration of the bootstrap simulation we computed an effective sample size that indicated the change in uncertainty caused by sub-sampling length frequency and age specimen data. 
+The harmonic mean was used to summarize these effective sample sizes across iterations.
+This has been shown to reduce bias in recovering the true sample size in simulations for a multinomial distribution and has been recommended to determine the ‘input sample size’ used as an initial weighting in stock assessment models to fit compositional data [@Stewart2014]. 
+Herein, we use the term ‘iterated effective sample size’ (iterated ESS) to refer to the effective sample sizes computed for each iteration of the bootstrap-simulation, and we use the term ‘input sample size’ (ISS) to refer to the harmonic mean of the iterated effective sample sizes. 
+We provide results of both the annual age and length composition ISS estimates and their relative size (proportion ISS) compared to the full dataset ISS. 
+The proportion ISS was computed as the ISS at a pre-determined sub-sampling level divided by the full dataset ISS (no sub-sampling) for each survey year. 
+This provides an indication of the amount of change in uncertainty due to reductions in sub-sampling rates.
 
 # Results
 
