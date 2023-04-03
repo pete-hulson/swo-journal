@@ -189,48 +189,51 @@ Thus, across each iteration of the bootstrap simulation we computed an effective
 The harmonic mean was used to summarize these effective sample sizes across iterations.
 This has been shown to reduce bias in recovering the true sample size in simulations for a multinomial distribution and has been recommended to determine the ‘input sample size’ used as an initial weighting in stock assessment models to fit compositional data [@Stewart2014]. 
 Herein, we use the term ‘iterated effective sample size’ (iterated ESS) to refer to the effective sample sizes computed for each iteration of the bootstrap-simulation, and we use the term ‘input sample size’ (ISS) to refer to the harmonic mean of the iterated effective sample sizes. 
-We provide results of both the annual age and length composition ISS estimates and their relative size (proportion ISS) compared to the full dataset ISS. 
-The proportion ISS was computed as the ISS at a pre-determined sub-sampling level divided by the full dataset ISS (no sub-sampling) for each survey year. 
+We provide results of both the annual age and length composition ISS estimates and their relative size (termed 'relative ISS') compared to the full dataset ISS. 
+The relative ISS was computed as the ISS at a pre-determined sub-sampling level divided by the full dataset ISS (no sub-sampling) for each survey year. 
 This provides an indication of the amount of change in uncertainty due to reductions in sub-sampling rates.
 
 # Results
 
-As the number of samples taken within hauls for length frequency decreased, the ISS decreased, but not dramatically (Figure \@ref(fig:bs-length-iss)).
-While we show the EBS stocks as an example, this trend of decreasing length composition ISS with decreasing haul sub-sampling level for length frequency also resulted across all regions, stocks, and sex categories evaluated.
-For all stocks evaluated the sex-specific length composition ISS were smaller than the total (combined sex) ISS, this remained true within each individual sub-sampling case as well.
-There were, however, stock-specific differences in the sex-specific ISS magnitude; if the magnitudes were different it was the case that female length composition ISS was larger than male length composition ISS.
-While the magnitude of length composition ISS was stock-specific and sex category-specific, across survey years the length composition ISS generally ranged from 250 to 3,000.
-The variability in length composition ISS across survey years and haul sub-sampling levels was also stock-specific, but the variability generally reduced as the haul sub-sampling level decreased.
+As the number of length frequency sub-samples taken within hauls decreased, the ISS decreased, but not dramatically (e.g., moving right to left on the *x*-axis, Figure \@ref(fig:bs-length-iss)).
+This trend of decreasing length composition ISS associated with decreasing sub-sampling levels per haul for length frequency was observed across all regions, stocks, and sex categories evaluated (*see supplementary material*).
+The sex-specific length composition ISS were smaller than the total (combined sex) ISS for all stocks evaluated.
+This remained true for each individual sub-sampling case as well.
+However, stock-specific differences in the magnitude of sex-specific ISS were observed (e.g., arrowtooth flounder and yellowfin sole).
+If the magnitudes were different, female length composition ISS was consistently larger than male length composition ISS.
+While the magnitude of length composition ISS was stock-specific and sex-specific, across survey years the length composition ISS generally ranged from 250 to 3,000 (including the full dataset case and all sub-sampling levels).
+The variability in length composition ISS across survey years and haul sub-sampling levels was also stock-specific, but the variability generally declined as the haul sub-sampling level decreased.
 Across the length frequency haul level sub-sampling cases evaluated, the magnitude of age composition ISS for all stocks within each region was unaffected by length sub-sampling (Figure \@ref(fig:ai-age-length-iss), shown for AI stocks as an example).
 
-As the sub-sampling level within a haul for length frequency decreased the proportion of the full dataset length composition ISS decreased (Figure \@ref(fig:prop-length-iss)), following from the results of the decreasing trend in ISS magnitude across sub-sampling levels.
-This decrease in the proportion of length composition sub-sampled ISS compared to full dataset ISS was consistent across the stocks evaluated, although the magnitude of decrease was region and stock-specific.
-The largest decrease in the proportion of full dataset ISS across the sub-sampling levels evaluated resulted for EBS walleye pollock, where the smallest decrease resulted for GOA rex sole and southern rock sole.
-The largest variability across survey years in the proportion of full dataset ISS with the sub-sampling levels of 50 and 100 lengths per haul resulted for AI walleye pollock and GOA northern rockfish.
-For sub-sampling levels of 150 and greater the variability the the proporiton of full dataset length composition ISS was small and consistent across all the stocks evaluated.
+As the length frequency sub-sampling level decreased the relative ISS also decreased (Figure \@ref(fig:prop-length-iss)).
+This decrease in relative ISS was exhibited by all stocks evaluated, although the magnitude of decrease was region and stock-specific (*supp mat*).
+The largest decrease in the relative ISS across the length frequency sub-sampling levels evaluated resulted for EBS walleye pollock and the smallest decrease resulted for GOA rex sole and southern rock sole.
+The largest variability across survey years in the relative ISS was observed for sub-sampling levels of 50 and 100 lengths per haul for AI walleye pollock and GOA northern rockfish.
+For sub-sampling levels of 150 and greater the variability in length composition relative ISS was small and consistent across all the stocks evaluated.
 
-While the magnitude of decrease in the proportion of length composition ISS was region and sex-specific, none of the stocks decreased to lower than 50% of the full dataset ISS; the majority of stocks did not decrease to lower than 60%.
-For all the stocks evaluated, the range in the annual proportion of full dataset ISS across the sex categories evaluated were either above or included 90% of the full dataset length composition ISS for the length frequency sub-sampling levels of 100 fish per haul; the only exception was for EBS walleye pollock female and male proportion of length composition ISS.
-Besides EBS walleye pollock, in which the range in the annual proportion of full dataset ISS included 90%, the remainder of the stocks evaluated resulted in proportions of full dataset ISS greater than 90% for length frequency sub-sampling levels of 150 fish per haul or more regardless of length composition sex category.
-Sampling at a level of 100 to 150 fish per haul for length frequency would result in 8,000 to greater than 30,000 fewer collections per-year within the surveys evaluated (Table \@ref(tab:ss-saved)).
+While the magnitude of decrease in the length composition relative ISS was region and sex-specific, none of the stocks decreased below 50%, and the majority of stocks did not decrease below 60% (Figure \@ref(fig:prop-length-iss)).
+The range in the length composition annual relative ISS across the sex categories evaluated were either at or above 90% for length frequency sub-sampling levels greater than 100 fish per haul.
+EBS walleye pollock was the one exception, where the relative ISS was less than 90% for females and males.
+Besides EBS walleye pollock, in which the range in the relative ISS included 90%, the remainder of the stocks evaluated resulted in relative ISS greater than 90% for length frequency sub-sampling levels of 150 fish per haul or more regardless of length composition sex category.
+Sampling at a level of 100 to 150 fish per haul for length frequency would result in 7,000 - 32,000 fewer collections per-year within the surveys evaluated (Table \@ref(tab:ss-saved)).
 
-Where the age composition ISS was unaffected by the length frequency sub-sampling level, the age composition ISS did markedly decrease as the proportion of total age collections decreased (Figure \@ref(fig:goa-age-iss)).
-In Figure \@ref(fig:goa-age-iss) we use the stocks in the GOA bottom trawl survey as an example and note that this result was consistent across all regions, stocks, and sex categories evaluated.
-Similar to the results for length composition ISS, the sex-specific age composition ISS were smaller than the total (combined sex) iterated ISS across all stocks evaluated, and the magnitude of age composition ISS compared between sex categories (female and male) could differ by stocks.
+While age composition ISS was unaffected by the length frequency sub-sampling level, the age composition ISS did markedly decrease as the proportion of total specimen age data decreased (Figure \@ref(fig:goa-age-iss)).
+We note that this result was consistent across all regions, stocks, and sex categories evaluated (*supp mat*).
+Similar to the results for length composition ISS, the sex-specific age composition ISS were smaller than the total (combined sex) ISS across all stocks evaluated, and the magnitude of age composition ISS compared between sex categories (female and male) differed by stocks.
 Following the results of the sex-specific length composition ISS, if the magnitudes in age composition ISS were different between the sex categories, the female age composition ISS was larger than the male age composition ISS.
-The magnitude of sex-specific and total ISS were stock-specific, and ranged from 10 to 500; smaller than the length composition ISS in the same year for the same stock.
+The magnitude of sex-specific and total ISS were stock-specific, and ranged from 10 to 500; which was smaller than the length composition ISS in the same year for the same stock.
 The variability in annual age composition ISS was also stock specific, where some stocks displayed larger range in age composition ISS across survey years than others.
 
-The proportion of decrease from the full dataset age composition ISS was region and stock-specific, as was the variability in the decrease in age composition ISS across the survey years (Figure \@ref(fig:prop-age-iss)).
-Some of the largest decreases in age composition ISS across the total age sub-sampling levels resulted for arrowtooth flounder and Pacific cod in each survey evaluated, where the smallest decrease resulted for GOA walleye pollock.
-The largest variability across the survey years in the proportion of ISS across age sub-sampling levels again resulted for Pacific cod, but also included AI Atka mackerel and walleye pollock across each survey area, while the variablity was relatively small for the remaining stocks.
-Even though there were differences in the proportion of age composition ISS across the age sub-sampling levels evaluated, the results across stocks were generally consistent.
+The age composition relative ISS was region and stock-specific, as was the variability in the decrease in age composition ISS across the survey years (Figure \@ref(fig:prop-age-iss)).
+Some of the largest decreases in age composition ISS across the total age sub-sampling levels resulted for arrowtooth flounder and Pacific cod in each survey evaluated, while the smallest decrease resulted for GOA walleye pollock.
+The largest variability across the survey years in the relative ISS across age sub-sampling levels again resulted for Pacific cod, but also included AI Atka mackerel and walleye pollock across each survey area, with relatively small variability observed for the remaining stocks.
+Even though there were differences in the age composition relative ISS across the age sub-sampling levels evaluated, the trends across stocks were generally consistent.
 
-A notable result was that for all stocks evaluated, the proportional decrease in age composition ISS was dampened when compared to the proportional decrease in total age samples collected (Figure \@ref(fig:prop-age-iss-nss)).
-For example, a reduction to 25% of the total age samples did not translate to a sub-sampled dataset age composition ISS reduction of 25% of the full dataset ISS, but rather resulted in a sub-sampled dataset age composition ISS of 30-40% of the full dataset ISS; this was true at each total age collection sub-sampling level evaluated.
+A notable result was that for all stocks evaluated, the decrease in age composition relative ISS was dampened when compared to the proportional decrease in total age samples collected (Figure \@ref(fig:prop-age-iss-nss)).
+For example, a reduction to 25% of the total age samples did not translate to a sub-sampled dataset age composition relative ISS reduction to 25%, but rather resulted in a sub-sampled dataset age composition relative ISS of 30-40%; this was true at each age collection sub-sampling level evaluated.
 For rockfish and flatfish, the reduction in ISS compared to the reduction in total age samples were similar, both across stocks and sex categories.
-In comparison, for gadids and other (Atka mackerel), the reduction in age composition ISS compared to reduction in total age samples was further dampened, where the reduction in total age samples resulted in a proportionally smaller reduction in age composition ISS compared to rockfish and flatfish stocks.
-Regardless, for all stocks and sex categories evaluated, the reduction in ISS was less than the reduction in the total age samples collected on the surveys.
+In comparison, for gadids and other (Atka mackerel), the reduction in age composition relative ISS compared to reduction in total age samples was further dampened, where the reduction in total age samples resulted in a proportionally smaller reduction in age composition ISS compared to rockfish and flatfish stocks.
+Regardless, for all stocks and sex categories evaluated, the reduction in relative ISS was less than the reduction in the total age samples collected on the surveys.
 
 # Discussion
 
