@@ -300,8 +300,7 @@ Future work to evaluate the consequences of reducing, or increasing, composition
 
 # Acknowledgments
 
-We thank *reviewer1* and *reviewer2* for their helpful reviews of this manuscript. 
-We thank the remaining members of the AFSC Survey Workload Optimization Working Group for there contributions to this work: William T. Stockhausen, Susanne F. McDermott and W. Chris Long.
+We thank the remaining members of the AFSC Survey Workload Optimization Working Group for their contributions to this work: William T. Stockhausen, Susanne F. McDermott and W. Chris Long.
 We express our deep gratitude to all the AFSC staff who have spent time at sea and staring through microscopes to produce the data these analyses are based upon.
 
 \newpage
@@ -316,14 +315,14 @@ We express our deep gratitude to all the AFSC staff who have spent time at sea a
 
 ```{r species-samples}
 knitr::kable(vroom::vroom(here::here('tables', 'species_sample.csv')), 
-             caption = "Average length and age (shown in parentheses) samples from the most recent three AFSC bottom trawl surveys by region for the stocks evaluated in the bootstrap-simulation for reduction in length and age collections.", 
+             caption = "Average length and age samples (length samples shown first, age samples shown in parentheses) from the most recent three AFSC bottom trawl surveys by region for the stocks evaluated in the bootstrap-simulation for reduction in length and age collections.", 
              align = c('llccc'), 
              format.args = list(big.mark = ",", scientific = FALSE))
 ```
 
 ```{r ss-saved}
 knitr::kable(vroom::vroom(here::here('tables', 'ss_saved.csv')), 
-             caption = "Average total number of reductions in length frequency samples when sampling 100 and 150 fish per haul by stock and region evaluated (rounded to the nearest 100s for stock-specific results, to the nearest 1,000s for total).",
+             caption = "Average total number of reductions in length frequency samples when sampling 100 (left side) and 150 (right side) fish per haul by stock and region evaluated (rounded to the nearest 100s for stock-specific results, to the nearest 1,000s for total).",
              align = c('lccc'), 
              format.args = list(big.mark = ",", scientific = FALSE))
 ```
@@ -332,11 +331,11 @@ knitr::kable(vroom::vroom(here::here('tables', 'ss_saved.csv')),
 
 # Figures 
 
-```{r bs-flows, fig.cap="Bootstrap-simulation flow chart, the steps refer to the order of operations."}
+```{r bs-flows, fig.cap="Bootstrap-simulation flow chart, with steps referring to the order of operations."}
 knitr::include_graphics(here::here('figs', 'full_flowchart.png'))
 ```
 
-```{r bs-length-iss, fig.cap="Boxplots of annual length composition input sample size size across length frequency sub-sampling levels evaluated for selected Eastern Bering Sea stocks."}
+```{r bs-length-iss, fig.cap="Boxplots of annual length composition input sample size across length frequency sub-sampling levels evaluated for selected eastern Bering Sea stocks."}
 knitr::include_graphics(here::here('figs', 'bs_length_iss_examp.png'))
 ```
 
