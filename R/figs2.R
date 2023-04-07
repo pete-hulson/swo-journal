@@ -302,7 +302,7 @@ dev.off()
 
 # all regions/species length iss
 png(filename=here::here("figs", "supp_mat_figs", "alt_props_iss_length.png"), 
-    width = 6.5, height = 6.5,
+    width = 6.5, height = 8,
     units = "in", res=200)
 
 len_iss %>% 
@@ -325,7 +325,7 @@ dev.off()
 
 # all regions/species age iss
 png(filename=here::here("figs", "supp_mat_figs", "alt_props_iss_age.png"), 
-    width = 6.5, height = 6.5,
+    width = 6.5, height = 8,
     units = "in", res=200)
 
 age_iss %>% 
@@ -350,7 +350,7 @@ dev.off()
 
 # all regions/species length ess
 png(filename=here::here("figs", "supp_mat_figs", "alt_props_ess_length.png"), 
-    width = 6.5, height = 6.5,
+    width = 6.5, height = 8,
     units = "in", res=200)
 
 len_ess %>% 
@@ -369,7 +369,7 @@ dev.off()
 
 # all regions/species age ess
 png(filename=here::here("figs", "supp_mat_figs", "alt_props_ess_age.png"), 
-    width = 6.5, height = 6.5,
+    width = 6.5, height = 8,
     units = "in", res=200)
 
 age_ess %>% 
