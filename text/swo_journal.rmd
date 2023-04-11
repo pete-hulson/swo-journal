@@ -165,33 +165,30 @@ We also ran the bootstrap-simulation for the full number of length frequency and
 We ran the bootstrap-simulation for 500 iterations, which was a level beyond which variability in  results did not increase. 
 The bootstrap-simulation was developed in R [@Rcore] and is available via GitHub as an R package (https://github.com/BenWilliams-NOAA/swo).
 
-## Computing effective and input sample size
+## Computing input sample size
 
-We used two performance metrics to quantify potential changes in uncertainty of length and age compositions (i.e., population abundance-at-length and age) owing to reduced sampling of length frequency and/or specimen age information.
-First, effective sample size was used to compare each bootstrap replicate of length and age composition to the historically observed length and age composition.
-Second, uncertainty across bootstrap replicates was summarized using the harmonic mean of effective sample size replicates to generate an "input sample size".
-
-Effective sample size, as introduced by @Mcallister1997, is a statistic that can evaluate the level of intra-haul correlation in composition samples (whether from age or length frequency collections). 
-It is also a statistic that can evaluate the amount of uncertainty in an estimated composition compared to an observed composition. 
-Effective sample size is given by:
+Relative sample size, as introduced by @Mcallister1997, is a statistic that can evaluate the level of intra-haul correlation in age and length composition samples. 
+It is also a statistic that can evaluate the amount of uncertainty in estimated composition data compared to observed composition data. 
+Relative sample size is given by:
 
 \begin{equation}
- ESS_{i,y}=\frac{\sum_{c=1}^{C}E_{c,i,y}(1-E_{c,i,y})}{\sum_{c=1}^{C}(E_{c,i,y}-O_{c,y})^2}
+ R_{i,y}=\frac{\sum_{c=1}^{C}E_{c,i,y}(1-E_{c,i,y})}{\sum_{c=1}^{C}(E_{c,i,y}-O_{c,y})^2}
  (\#eq:eqn1)
 \end{equation}
 
-where $E_{c,i,y}$ is the estimated proportion for category-*c* (which can be either age or length or any other arbitrary category across which proportions are computed) in interation-*i* and year-*y* and $O_{c,y}$ is the historically observed proportion in year-*y*.
-A larger ESS indicates higher certainty in the composition estimates, while lower ESS indicates less certainty. 
+where $E_{c,i,y}$ is the estimated proportion for category-*c* (which can be either age or length or any other arbitrary category across which proportions are computed) in interation-*i* and year-*y* and $O_{c,y}$ is the observed proportion for category-*c* in year-*y*.
+In this bootstrap-simulation the length and age compositions derived from the historical bottom trawl surveys' full datasets without any resampling were treated as the observed proportions $O_{c,y}$ in equation \@ref(eq:eqn1). 
+For each iteration of the bootstrap simulation for a pre-specified sub-sampling level we computed an estimated proportion ($E_{c,i,y}$) that was then compared to this observed sex-specific (and sex-aggregated total) length and age composition. 
+Thus, across each iteration of the bootstrap simulation we computed a relative sample size that indicated the change in uncertainty caused by sub-sampling length frequency and age specimen data. 
+A larger relative sample size indicates higher certainty in the iterated composition estimates, while lower relative sample size indicates less certainty. 
 
-In this bootstrap-simulation the length and age compositions derived from the historical bottom trawl surveys' full datasets were treated as the observed proportions $O_c$ in equation \@ref(eq:eqn1). 
-For each iteration of the bootstrap simulation for a pre-specified sub-sampling level we computed an estimated proportion ($E_c$) that was then compared to this observed sex-specific (and sex-aggregated total) length and age composition. 
-Thus, across each iteration of the bootstrap simulation we computed an effective sample size that indicated the change in uncertainty caused by sub-sampling length frequency and age specimen data. 
-The harmonic mean was used to summarize these effective sample sizes across iterations.
+The harmonic mean was used to summarize these relative sample sizes across iterations.
 This has been shown to reduce bias in recovering the true sample size in simulations for a multinomial distribution and has been recommended to determine the ‘input sample size’ used as an initial weighting in stock assessment models to fit compositional data [@Stewart2014]. 
-Herein, we use the term ‘iterated effective sample size’ (iterated ESS) to refer to the effective sample sizes computed for each iteration of the bootstrap-simulation, and we use the term ‘input sample size’ (ISS) to refer to the harmonic mean of the iterated effective sample sizes. 
+Herein, we use the term ‘iterated relative sample size’ (iterated *R*) to refer to the relative sample sizes computed for each iteration of the bootstrap-simulation, and we use the term ‘input sample size’ (ISS) to refer to the harmonic mean of the iterated relative sample sizes. 
 We provide results of both the annual age and length composition ISS estimates and their relative size (termed 'relative ISS') compared to the full dataset ISS. 
 The relative ISS was computed as the ISS at a pre-determined sub-sampling level divided by the full dataset ISS (no sub-sampling) for each survey year. 
 This provides an indication of the amount of change in uncertainty due to reductions in sub-sampling rates.
+*maybe more here*
 
 # Results
 
