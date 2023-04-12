@@ -38,679 +38,402 @@ ggplot2::theme_set(
     )
 )
 
-# pull in output ----
+# data ----
+# species_code and common names
+spec <- vroom::vroom(here::here('data', 'species_code_name.csv')) %>% 
+  tidytable::mutate(species_name = stringr::str_to_sentence(species_name))
 
-spec <- vroom::vroom(here::here('data', 'species_code_name.csv')) # species_code and common names
+age_iss <- vroom::vroom(here::here('output', 'agesub_iss.csv')) %>% 
+  tidytable::filter(!(species_code %in% c(10112, 10115, 10180))) %>% 
+  tidytable::mutate(p_base = sub_iss_age / base_iss_age,
+                    sub_samp = gsub("a", "", sub_samp),
+                    prop_samp = as.numeric(sub_samp) * .01,
+                    sub_samp = factor(sub_samp, level = c('25', '50', '75', '90')),
+                    surv_labs = case_when(region == 'goa' ~ "Gulf of Alaska",
+                                          region == 'ai' ~ "Aleutian Islands",
+                                          region == 'bs' ~ "Eastern Bering Sea Shelf")) %>% 
+  tidytable::left_join(spec) %>% 
+  tidytable::drop_na()
 
-agesub_iss <- vroom::vroom(here::here('output', 'agesub_iss.csv')) %>% 
-  tidytable::filter(!(species_code %in% c(10112, 10115, 10180)))
-agesub_ess <- vroom::vroom(here::here('output', 'big_output', 'agesub_ess.csv')) %>% 
-  tidytable::filter(!(species_code %in% c(10112, 10115, 10180)))
-lensub_iss <- vroom::vroom(here::here('output', 'totlen_iss.csv')) %>% 
-  tidytable::filter(!(species_code %in% c(10112, 10115, 10180)))
-lensub_ess <- vroom::vroom(here::here('output', 'big_output', 'totlen_ess.csv')) %>% 
-  tidytable::filter(!(species_code %in% c(10112, 10115, 10180)))
+len_iss <- vroom::vroom(here::here('output', 'totlen_iss.csv')) %>% 
+  tidytable::filter(!(species_code %in% c(10112, 10115, 10180))) %>% 
+  tidytable::mutate(p_base = sub_iss_length / base_iss_length,
+                    sub_samp = gsub("t", "", sub_samp),
+                    sub_samp = factor(sub_samp, level = c('50', '100', '150', '200', '250')),
+                    surv_labs = case_when(region == 'goa' ~ "Gulf of Alaska",
+                                          region == 'ai' ~ "Aleutian Islands",
+                                          region == 'bs' ~ "Eastern Bering Sea Shelf")) %>% 
+  tidytable::left_join(spec) %>% 
+  tidytable::drop_na()
 
 surv_labs <- c("Aleutian Islands", "Bering Sea Shelf", "Gulf of Alaska")
 names(surv_labs) <- c("ai", "bs", "goa")
 
-# plot length ess subsample example ----
+# plot fcns for supplementary material ----
 
-# goa
-lensub_ess %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::filter(region == 'goa' & year == 2019) %>% 
-  tidytable::mutate(p_base_len = sub_ess_length / base_ess_length,
-                    sub_samp = case_when(sub_samp == 't50' ~ '50',
-                                         sub_samp == 't100' ~ '100',
-                                         sub_samp == 't150' ~ '150',
-                                         sub_samp == 't200' ~ '200',
-                                         sub_samp == 't250' ~ '250'),
-                    sub_samp = factor(sub_samp)) -> plot_dat1_goa
+iss_plot <- function(data, type = 'age', reg = 'goa') {
+  
+  if(type == "age"){
+    data %>% 
+      tidytable::rename(sub_iss_age = base_iss_age,
+                        base_iss_age = sub_iss_age) %>% 
+      tidytable::mutate(sub_samp = '100') %>% 
+      tidytable::bind_rows(data) %>% 
+      tidytable::filter(species_type != 'other',
+                        region == reg) %>% 
+      ggplot(., aes(x = factor(sub_samp, level = c('25', '50', '75', '90', '100')), 
+                    y = sub_iss_age, 
+                    fill = comp_type)) +
+      geom_boxplot2(width.errorbar = 0) +
+      facet_grid(species_name ~ comp_type, 
+                 scales = "free",
+                 labeller = label_wrap_gen(10)) +
+      theme(legend.position = "none",
+            text = element_text(size = 13),
+            strip.text.y.right = element_text(angle = 0)) +
+      xlab("\nAge sub-sampling level (%)") +
+      ylab("Age composition input sample size\n") +
+      scale_fill_scico_d(palette = 'roma',
+                         name = "Composition type")
+    
+  } else {
+    
+    data %>% 
+      tidytable::rename(sub_iss_length = base_iss_length,
+                        base_iss_length = sub_iss_length) %>% 
+      tidytable::mutate(sub_iss_len = base_iss_length,
+                        sub_samp = 'Full') %>% 
+      tidytable::bind_rows(data) %>% 
+      tidytable::filter(region == reg) %>% 
+      ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250', 'Full')), 
+                    y = sub_iss_length, 
+                    fill = comp_type)) +
+      geom_boxplot2(width.errorbar = 0) +
+      facet_grid(species_name ~ comp_type, 
+                 scales = "free",
+                 labeller = label_wrap_gen(10)) +
+      theme(legend.position = "none",
+            text = element_text(size = 13),
+            strip.text.y.right = element_text(angle = 0)) +
+      xlab("\nHaul length frequency sample size") +
+      ylab("Length composition input sample size\n")  +
+      scale_fill_scico_d(palette = 'roma',
+                         name = "Composition type")
+  }
+}
 
-plot_dat1_goa %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
-                y = sub_ess_length, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Haul length frequency sub-sampling level") +
-  ylab("Length composition iterated effective sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> goa_ess_length
+prop_iss_plot <- function(data, type = 'age', reg = 'goa') {
+  
+  if(type == "age"){
+    
+    data %>% 
+      tidytable::filter(species_type != 'other',
+                        region == reg) %>% 
+      ggplot(., aes(x = factor(sub_samp, level = c('25', '50', '75', '90')), 
+                    y = p_base, 
+                    fill = comp_type)) +
+      geom_boxplot2(width.errorbar = 0) +
+      facet_grid(species_name ~ comp_type,
+                 labeller = label_wrap_gen(10)) +
+      theme(legend.position = "bottom",
+            text = element_text(size = 14),
+            strip.text.y.right = element_text(angle = 0)) +
+      xlab("\nAge sub-sampling level (%)") +
+      ylab("Relative age composition input sample size\n") +
+      scale_fill_scico_d(palette = 'roma',
+                         name = "Composition type") +
+      geom_abline(slope = 0, intercept = 0.9, colour = "grey")
+    
+  } else {
+    
+    data %>%  
+      tidytable::filter(region == reg) %>% 
+      ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
+                    y = p_base, 
+                    fill = comp_type)) +
+      geom_boxplot2(width.errorbar = 0) +
+      facet_grid(species_name ~ comp_type,
+                 labeller = label_wrap_gen(10)) +
+      theme(legend.position = "none",
+            text = element_text(size = 13),
+            strip.text.y.right = element_text(angle = 0)) +
+      xlab("\nHaul length frequency sample size") +
+      ylab("Relative length composition input sample size\n") +
+      scale_fill_scico_d(palette = 'roma',
+                         name = "Composition type") +
+      geom_abline(slope = 0, intercept = 0.9, colour = "grey")
 
-ggsave(here::here("figs", "goa_length_ess_examp.png"),
-       goa_ess_length,
-       device = "png",
-       width = 6,
-       height = 7)
-
-# bs
-lensub_ess %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::filter(region == 'bs' & year == 2021) %>% 
-  tidytable::mutate(p_base_len = sub_ess_length / base_ess_length,
-                    sub_samp = case_when(sub_samp == 't50' ~ '50',
-                                         sub_samp == 't100' ~ '100',
-                                         sub_samp == 't150' ~ '150',
-                                         sub_samp == 't200' ~ '200',
-                                         sub_samp == 't250' ~ '250'),
-                    sub_samp = factor(sub_samp)) -> plot_dat1_bs
-
-plot_dat1_bs %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
-                y = sub_ess_length, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Haul length frequency sub-sampling level") +
-  ylab("Length composition iterated effective sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> bs_ess_length
-
-ggsave(here::here("figs", "bs_length_ess_examp.png"),
-       bs_ess_length,
-       device = "png",
-       width = 6,
-       height = 7)
-
-# ai
-lensub_ess %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::filter(region == 'ai' & year == 2018) %>% 
-  tidytable::mutate(p_base_len = sub_ess_length / base_ess_length,
-                    sub_samp = case_when(sub_samp == 't50' ~ '50',
-                                         sub_samp == 't100' ~ '100',
-                                         sub_samp == 't150' ~ '150',
-                                         sub_samp == 't200' ~ '200',
-                                         sub_samp == 't250' ~ '250'),
-                    sub_samp = factor(sub_samp)) -> plot_dat1_ai
-
-plot_dat1_ai %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
-                y = sub_ess_length, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Haul length frequency sub-sampling level") +
-  ylab("Length composition iterated effective sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> ai_ess_length
-
-ggsave(here::here("figs", "ai_length_ess_examp.png"),
-       ai_ess_length,
-       device = "png",
-       width = 6,
-       height = 7)
-
-# plot age ess for length subsample example ----
-
-# goa
-plot_dat1_goa %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
-                y = ess_age, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Haul length frequency sub-sampling level") +
-  ylab("Age composition iterated effective sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> goa_ess_age
-
-ggsave(here::here("figs", "goa_age_length_ess_examp.png"),
-       goa_ess_age,
-       device = "png",
-       width = 6,
-       height = 7)
-
-# bs
-plot_dat1_bs %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
-                y = ess_age, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Haul length frequency sub-sampling level") +
-  ylab("Age composition iterated effective sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> bs_ess_age
-
-ggsave(here::here("figs", "bs_age_length_ess_examp.png"),
-       bs_ess_age,
-       device = "png",
-       width = 6,
-       height = 7)
-
-# ai
-plot_dat1_ai %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
-                y = ess_age, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Haul length frequency sub-sampling level") +
-  ylab("Age composition iterated effective sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> ai_ess_age
-
-ggsave(here::here("figs", "ai_age_length_ess_examp.png"),
-       ai_ess_age,
-       device = "png",
-       width = 6,
-       height = 7)
+  }
+}
 
 
-# plot length iss subsample example ----
 
-# goa
-lensub_iss %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::filter(region == 'goa') %>% 
-  tidytable::mutate(p_base_len = sub_iss_length / base_iss_length,
-                    sub_samp = case_when(sub_samp == 't50' ~ '50',
-                                         sub_samp == 't100' ~ '100',
-                                         sub_samp == 't150' ~ '150',
-                                         sub_samp == 't200' ~ '200',
-                                         sub_samp == 't250' ~ '250'),
-                    sub_samp = factor(sub_samp)) -> plot_dat1_goa
+# plot length iss for type & sex ----
 
-plot_dat1_goa %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
+len_iss %>% 
+  tidytable::rename(sub_iss_length = base_iss_length,
+                    base_iss_length = sub_iss_length) %>% 
+  tidytable::mutate(sub_iss_len = base_iss_length,
+                    sub_samp = 'Full') %>% 
+  tidytable::bind_rows(len_iss) %>% 
+  tidytable::filter(species_type != 'other') %>% 
+  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250', 'Full')), 
                 y = sub_iss_length, 
                 fill = comp_type)) +
   geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Haul length frequency sub-sampling level") +
-  ylab("Length composition input sample size") +
+  facet_grid(~ species_type, 
+             scales = "free") + 
+  theme(text = element_text(size = 14),
+        axis.text.x = element_blank(),
+        legend.position = "none",
+        axis.title.x = element_blank()) +
+  xlab("\nHaul length frequency sample size") +
+  ylab("Length input sample size\n") +
   scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> goa_iss_length
+                     name = "Composition type") -> p1
 
-ggsave(here::here("figs", "goa_length_iss_examp.png"),
-       goa_iss_length,
-       device = "png",
-       width = 6,
-       height = 7)
-
-# bs
-lensub_iss %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::filter(region == 'bs') %>% 
-  tidytable::mutate(p_base_len = sub_iss_length / base_iss_length,
-                    sub_samp = case_when(sub_samp == 't50' ~ '50',
-                                         sub_samp == 't100' ~ '100',
-                                         sub_samp == 't150' ~ '150',
-                                         sub_samp == 't200' ~ '200',
-                                         sub_samp == 't250' ~ '250'),
-                    sub_samp = factor(sub_samp)) -> plot_dat1_bs
-
-plot_dat1_bs %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
-                y = sub_iss_length, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             # scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Haul length frequency sub-sampling level") +
-  ylab("Length composition input sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> bs_iss_length
-
-ggsave(here::here("figs", "bs_length_iss_examp.png"),
-       bs_iss_length,
-       device = "png",
-       width = 6,
-       height = 7)
-
-# ai
-lensub_iss %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::filter(region == 'ai') %>% 
-  tidytable::mutate(p_base_len = sub_iss_length / base_iss_length,
-                    sub_samp = case_when(sub_samp == 't50' ~ '50',
-                                         sub_samp == 't100' ~ '100',
-                                         sub_samp == 't150' ~ '150',
-                                         sub_samp == 't200' ~ '200',
-                                         sub_samp == 't250' ~ '250'),
-                    sub_samp = factor(sub_samp)) -> plot_dat1_ai
-
-plot_dat1_ai %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
-                y = sub_iss_length, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Haul length frequency sub-sampling level") +
-  ylab("Length composition input sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> ai_iss_length
-
-ggsave(here::here("figs", "ai_length_iss_examp.png"),
-       ai_iss_length,
-       device = "png",
-       width = 6,
-       height = 7)
-
-# plot age iss for length subsample example ----
-
-# goa
-plot_dat1_goa %>% 
-  tidytable::drop_na() %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
+len_iss %>% 
+  tidytable::rename(sub_iss_length = base_iss_length,
+                    base_iss_length = sub_iss_length) %>% 
+  tidytable::mutate(sub_iss_len = base_iss_length,
+                    sub_samp = 'Full') %>% 
+  tidytable::bind_rows(len_iss) %>% 
+  tidytable::filter(species_type != 'other') %>% 
+  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250', 'Full')), 
                 y = iss_age, 
                 fill = comp_type)) +
   geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             # scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Haul length frequency sub-sampling level") +
-  ylab("Age composition input sample size") +
+  facet_grid(~ species_type, 
+             scales = "free") + 
+  theme(text = element_text(size = 14),
+        strip.text.x = element_blank(),
+        legend.position = "bottom") +
+  xlab("\nHaul length frequency sample size") +
+  ylab("Age input sample size\n") +
   scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> goa_iss_age
+                     name = "Composition type") -> p2
 
-ggsave(here::here("figs", "goa_age_length_iss_examp.png"),
-       goa_iss_age,
+ggarrange(p1,
+          p2,
+          ncol= 1) -> iss_length
+
+ggsave(here::here("figs", "length_iss.png"),
+       iss_length,
        device = "png",
-       width = 6,
+       width = 7,
        height = 7)
 
-# bs
-plot_dat1_bs %>% 
+# plot regional length iss (supplementary material) ----
+
+png(filename=here::here("figs", "supp_mat_figs", "length_iss_goa.png"), 
+    width = 7, height = 8.0,
+    units = "in", res = 200)
+
+iss_plot(len_iss, type = 'length', reg = 'goa')
+
+dev.off()
+
+png(filename=here::here("figs", "supp_mat_figs", "length_iss_ai.png"), 
+    width = 7, height = 8.0,
+    units = "in", res = 200)
+
+iss_plot(len_iss, type='length', reg = 'ai')
+
+dev.off()
+
+png(filename=here::here("figs", "supp_mat_figs", "length_iss_bs.png"), 
+    width = 7, height = 8.0,
+    units = "in", res = 200)
+
+iss_plot(len_iss, type='length', reg = 'bs')
+
+dev.off()
+
+# plot length subsample proportion of base by survey and species type ----
+
+len_iss %>%  
+  tidytable::filter(species_type != 'other') %>% 
   ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
-                y = iss_age, 
+                y = p_base, 
                 fill = comp_type)) +
   geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             scales = "free",
+  facet_grid(surv_labs ~ species_type,
              labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Haul length frequency sub-sampling level") +
-  ylab("Age composition input sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> bs_iss_age
-
-ggsave(here::here("figs", "bs_age_length_iss_examp.png"),
-       bs_iss_age,
-       device = "png",
-       width = 6,
-       height = 7)
-
-# ai
-plot_dat1_ai %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
-                y = iss_age, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             # scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Haul length frequency sub-sampling level") +
-  ylab("Age composition inputsample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> ai_iss_age
-
-ggsave(here::here("figs", "ai_age_length_iss_examp.png"),
-       ai_iss_age,
-       device = "png",
-       width = 6,
-       height = 7)
-
-# plot length subsample proportion of base for all species ----
-
-lensub_iss %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::mutate(p_base_len = sub_iss_length / base_iss_length,
-                    sub_samp = case_when(sub_samp == 't50' ~ '50',
-                                         sub_samp == 't100' ~ '100',
-                                         sub_samp == 't150' ~ '150',
-                                         sub_samp == 't200' ~ '200',
-                                         sub_samp == 't250' ~ '250'),
-                    sub_samp = factor(sub_samp)) %>% 
-  tidytable::drop_na()-> plot_dat2
-
-plot_dat2 %>% 
-  tidytable::mutate(surv_labs = case_when(region == 'goa' ~ "Gulf of Alaska",
-                                          region == 'ai' ~ "Aleutian Islands",
-                                          region == 'bs' ~ "Bering Sea Shelf")) %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
-                y = p_base_len, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_wrap(species_name ~ surv_labs,
-             labeller = function (labels) {
-               labels <- lapply(labels, as.character)
-               list(do.call(paste, c(labels, list(sep = "\n"))))
-             }) +
   theme(legend.position = "bottom",
-        axis.text.x = element_text(angle = -45, hjust = 0),
-        text = element_text(size = 11)) +
-  xlab("Haul length frequency sub-sampling level") +
-  ylab("Length composition proportion of full dataset input sample size") +
+        text = element_text(size = 14),
+        strip.text.y.right = element_text(angle = 0)) +
+  xlab("\nHaul length frequency sample size") +
+  ylab("Relative length composition input sample size\n") +
   scale_fill_scico_d(palette = 'roma',
                      name = "Composition type") +
   geom_abline(slope = 0, intercept = 0.9, colour = "grey") -> prop_iss_length
 
-ggsave(here::here("figs", "prop_iss_length.png"),
+ggsave(here::here("figs", "length_iss_prop.png"),
        prop_iss_length,
        device = "png",
-       width = 6,
-       height = 6)
-
-# plot age ess subsample example ----
-
-# goa
-agesub_ess %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::filter(region == 'goa' & year == 2021) %>% 
-  tidytable::mutate(p_base_len = sub_ess_age / base_ess_age,
-                    sub_samp = case_when(sub_samp == 'a25' ~ '25%',
-                                         sub_samp == 'a50' ~ '50%',
-                                         sub_samp == 'a75' ~ '75%',
-                                         sub_samp == 'a90' ~ '90%'),
-                    sub_samp = factor(sub_samp)) -> plot_dat3_goa
-
-
-plot_dat3_goa %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('25%', '50%', '75%', '90%')), 
-                y = sub_ess_age, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Total age collection sub-sampling level") +
-  ylab("Age composition iterated effective sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> goa_ess_age
-
-ggsave(here::here("figs", "goa_age_ess_examp.png"),
-       goa_ess_age,
-       device = "png",
-       width = 6,
+       width = 7,
        height = 7)
 
-# bs
-agesub_ess %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::filter(region == 'bs' & year == 2021) %>% 
-  tidytable::mutate(p_base_len = sub_ess_age / base_ess_age,
-                    sub_samp = case_when(sub_samp == 'a25' ~ '25%',
-                                         sub_samp == 'a50' ~ '50%',
-                                         sub_samp == 'a75' ~ '75%',
-                                         sub_samp == 'a90' ~ '90%'),
-                    sub_samp = factor(sub_samp)) -> plot_dat3_bs
+# plot length subsample proportion of base iss (supplementary material) ----
 
+png(filename=here::here("figs", "supp_mat_figs", "rel_length_iss_goa.png"), 
+    width = 7, height = 8.0,
+    units = "in", res = 200)
 
-plot_dat3_bs %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('25%', '50%', '75%', '90%')), 
-                y = sub_ess_age, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Total age collection sub-sampling level") +
-  ylab("Age composition iterated effective sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> bs_ess_age
+prop_iss_plot(len_iss, type = 'length', reg = 'goa')
 
-ggsave(here::here("figs", "bs_age_ess_examp.png"),
-       bs_ess_age,
-       device = "png",
-       width = 6,
-       height = 7)
+dev.off()
 
-# ai
-agesub_ess %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::filter(region == 'ai' & year == 2018) %>% 
-  tidytable::mutate(p_base_len = sub_ess_age / base_ess_age,
-                    sub_samp = case_when(sub_samp == 'a25' ~ '25%',
-                                         sub_samp == 'a50' ~ '50%',
-                                         sub_samp == 'a75' ~ '75%',
-                                         sub_samp == 'a90' ~ '90%'),
-                    sub_samp = factor(sub_samp)) -> plot_dat3_ai
+png(filename=here::here("figs", "supp_mat_figs", "rel_length_iss_ai.png"), 
+    width = 7, height = 8.0,
+    units = "in", res = 200)
 
+prop_iss_plot(len_iss, type = 'length', reg = 'ai')
 
-plot_dat3_ai %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('25%', '50%', '75%', '90%')), 
-                y = sub_ess_age, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Total age collection sub-sampling level") +
-  ylab("Age composition iterated effective sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> ai_ess_age
+dev.off()
 
-ggsave(here::here("figs", "ai_age_ess_examp.png"),
-       ai_ess_age,
-       device = "png",
-       width = 6,
-       height = 7)
+png(filename=here::here("figs", "supp_mat_figs", "rel_length_iss_bs.png"), 
+    width = 7, height = 8.0,
+    units = "in", res = 200)
 
-# plot age iss subsample example ----
+prop_iss_plot(len_iss, type = 'length', reg = 'bs')
 
-# goa
-agesub_iss %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::drop_na() %>% 
-  tidytable::filter(region == 'goa') %>% 
-  tidytable::mutate(p_base_len = sub_iss_age / base_iss_age,
-                    sub_samp = case_when(sub_samp == 'a25' ~ '25%',
-                                         sub_samp == 'a50' ~ '50%',
-                                         sub_samp == 'a75' ~ '75%',
-                                         sub_samp == 'a90' ~ '90%'),
-                    sub_samp = factor(sub_samp)) -> plot_dat3_goa
+dev.off()
 
+# plot age iss subsample for type and region ----
 
-plot_dat3_goa %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('25%', '50%', '75%', '90%')), 
+age_iss %>% 
+  tidytable::rename(sub_iss_age = base_iss_age,
+                    base_iss_age = sub_iss_age) %>% 
+  tidytable::mutate(sub_samp = '100') %>% 
+  tidytable::bind_rows(age_iss) %>% 
+  tidytable::filter(species_type != 'other') %>% 
+  ggplot(., aes(x = factor(sub_samp, level = c('25', '50', '75', '90', '100')), 
                 y = sub_iss_age, 
                 fill = comp_type)) +
   geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             # scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Total age collection sub-sampling level") +
-  ylab("Age composition input sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> goa_iss_age
-
-ggsave(here::here("figs", "goa_age_iss_examp.png"),
-       goa_iss_age,
-       device = "png",
-       width = 6,
-       height = 7)
-
-# bs
-agesub_iss %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::filter(region == 'bs') %>% 
-  tidytable::mutate(p_base_len = sub_iss_age / base_iss_age,
-                    sub_samp = case_when(sub_samp == 'a25' ~ '25%',
-                                         sub_samp == 'a50' ~ '50%',
-                                         sub_samp == 'a75' ~ '75%',
-                                         sub_samp == 'a90' ~ '90%'),
-                    sub_samp = factor(sub_samp)) -> plot_dat3_bs
-
-
-plot_dat3_bs %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('25%', '50%', '75%', '90%')), 
-                y = sub_iss_age, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Total age collection sub-sampling level") +
-  ylab("Age composition input sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> bs_iss_age
-
-ggsave(here::here("figs", "bs_age_iss_examp.png"),
-       bs_iss_age,
-       device = "png",
-       width = 6,
-       height = 7)
-
-# ai
-agesub_iss %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::filter(region == 'ai') %>% 
-  tidytable::mutate(p_base_len = sub_iss_age / base_iss_age,
-                    sub_samp = case_when(sub_samp == 'a25' ~ '25%',
-                                         sub_samp == 'a50' ~ '50%',
-                                         sub_samp == 'a75' ~ '75%',
-                                         sub_samp == 'a90' ~ '90%'),
-                    sub_samp = factor(sub_samp)) -> plot_dat3_ai
-
-
-plot_dat3_ai %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('25%', '50%', '75%', '90%')), 
-                y = sub_iss_age, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_grid(species_name ~ comp_type, 
-             # scales = "free",
-             labeller = label_wrap_gen(10)) +
-  theme(legend.position = "none",
-        text = element_text(size = 13)) +
-  xlab("Total age collection sub-sampling level") +
-  ylab("Age composition input sample size") +
-  scale_fill_scico_d(palette = 'roma',
-                     name = "Composition type") -> ai_iss_age
-
-ggsave(here::here("figs", "ai_age_iss_examp.png"),
-       ai_iss_age,
-       device = "png",
-       width = 6,
-       height = 7)
-
-
-
-
-# plot age subsample proportion of base for all species ----
-
-agesub_iss %>% 
-  tidytable::left_join(spec) %>% 
-  tidytable::mutate(p_base_age = sub_iss_age / base_iss_age,
-                    sub_samp = case_when(sub_samp == 'a25' ~ '25%',
-                                         sub_samp == 'a50' ~ '50%',
-                                         sub_samp == 'a75' ~ '75%',
-                                         sub_samp == 'a90' ~ '90%'),
-                    sub_samp = factor(sub_samp),
-                    prop_samp = case_when(sub_samp == '25%' ~ 0.25,
-                                          sub_samp == '50%' ~ 0.5,
-                                          sub_samp == '75%' ~ 0.75,
-                                          sub_samp == '90%' ~ 0.9)) %>% 
-  tidytable::drop_na()-> plot_dat4
-
-plot_dat4 %>% 
-  tidytable::mutate(surv_labs = case_when(region == 'goa' ~ "Gulf of Alaska",
-                                          region == 'ai' ~ "Aleutian Islands",
-                                          region == 'bs' ~ "Bering Sea Shelf")) %>% 
-  ggplot(., aes(x = factor(sub_samp, level = c('25%', '50%', '75%', '90%')), 
-                y = p_base_age, 
-                fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
-  facet_wrap(species_name ~ surv_labs,
-             # labeller = labeller(region = surv_labs)) +
-             labeller = function (labels) {
-               labels <- lapply(labels, as.character)
-               list(do.call(paste, c(labels, list(sep = "\n"))))
-             }) +
+  facet_grid(surv_labs ~ species_type,
+        labeller = label_wrap_gen(10)) +
   theme(legend.position = "bottom",
-        axis.text.x = element_text(angle = -45, hjust = 0),
-        text = element_text(size = 11),
-        panel.spacing.y = unit(0, "cm")) +
-  xlab("Total age collection sub-sampling level") +
-  ylab("Age composition proportion of full dataset input sample size") +
+        text = element_text(size = 14),
+        strip.text.y.right = element_text(angle = 0)) +
+  xlab("\nAge sub-sampling level (%)") +
+  ylab("Age composition input sample size\n") +
+  scale_fill_scico_d(palette = 'roma',
+                     name = "Composition type") -> iss_age
+
+ggsave(here::here("figs", "age_iss.png"),
+       iss_age,
+       device = "png",
+       width = 7,
+       height = 7)
+
+# plot age iss subsample (for goa)supplementary material ----
+
+png(filename=here::here("figs", "supp_mat_figs", "age_iss_goa.png"), 
+    width = 7, height = 8.0,
+    units = "in", res=200)
+
+iss_plot(age_iss, type = 'age', reg = 'goa')
+
+dev.off()
+
+png(filename=here::here("figs", "supp_mat_figs", "age_iss_ai.png"), 
+    width = 7, height = 8.0,
+    units = "in", res=200)
+
+iss_plot(age_iss, type = 'age', reg = 'ai')
+
+dev.off()
+
+png(filename=here::here("figs", "supp_mat_figs", "age_iss_bs.png"), 
+    width = 7, height = 8.0,
+    units = "in", res=200)
+
+iss_plot(age_iss, type = 'age', reg = 'bs')
+
+dev.off()
+
+
+
+
+# plot age subsample proportion ----
+
+age_iss %>% 
+  tidytable::filter(species_type != 'other') %>% 
+  ggplot(., aes(x = factor(sub_samp, level = c('25', '50', '75', '90')), 
+                y = p_base, 
+                fill = comp_type)) +
+  geom_boxplot2(width.errorbar = 0) +
+  facet_grid(surv_labs ~ species_type,
+             labeller = label_wrap_gen(10)) +
+  theme(legend.position = "bottom",
+        text = element_text(size = 14),
+        strip.text.y.right = element_text(angle = 0)) +
+  xlab("\nAge sub-sampling level (%)") +
+  ylab("Relative age composition input sample size\n") +
   scale_fill_scico_d(palette = 'roma',
                      name = "Composition type") +
   geom_abline(slope = 0, intercept = 0.9, colour = "grey") -> prop_iss_age
 
-ggsave(here::here("figs", "prop_iss_age.png"),
+ggsave(here::here("figs", "age_iss_prop.png"),
        prop_iss_age,
        device = "png",
-       width = 6,
-       height = 6)
+       width = 7,
+       height = 7)
+
+# plot age subsample proportion (supplementary material) ----
+
+png(filename=here::here("figs", "supp_mat_figs", "rel_age_iss_goa.png"), 
+    width = 7, height = 8.0,
+    units = "in", res = 200)
+
+prop_iss_plot(age_iss, type = 'age', reg = 'goa')
+
+dev.off()
+
+png(filename=here::here("figs", "supp_mat_figs", "rel_age_iss_ai.png"), 
+    width = 7, height = 8.0,
+    units = "in", res = 200)
+
+prop_iss_plot(age_iss, type = 'age', reg = 'ai')
+
+dev.off()
+
+png(filename=here::here("figs", "supp_mat_figs", "rel_age_iss_bs.png"), 
+    width = 7, height = 8.0,
+    units = "in", res = 200)
+
+prop_iss_plot(age_iss, type = 'age', reg = 'bs')
+
+dev.off()
+
+
+
 
 # plot relationship between decrease in iss and nss ----
 
-plot_dat4 %>% 
-  tidytable::summarise(p_base_age = mean(p_base_age),
-                       prop_samp = mean(prop_samp),
-                       .by = c(species_code, comp_type, region, species_name, species_type, sub_samp)) %>% 
-  ggplot(.,aes(x = prop_samp, y = p_base_age, pch = as.factor(species_name), color = as.factor(comp_type))) +
+age_iss %>% 
+  ggplot(.,aes(x = prop_samp, y = p_base, pch = as.factor(species_name), color = as.factor(comp_type))) +
   geom_point() +
   scale_shape_manual(values=seq(0,14)) +
-  facet_grid(region ~ species_type,
-             labeller = labeller(region = surv_labs)) +
-  geom_abline(slope = 1, intercept = 0, colour = "black") +
-  xlab("Proportion of total age samples") +
-  ylab("Proportion of age composition input sample size") +
+  facet_grid(surv_labs ~ species_type,
+             labeller = label_wrap_gen(10)) +
+  geom_abline(slope = 1, intercept = 0, colour = "black", linetype = 2) +
+  xlab("\nAge sub-sampling level") +
+  ylab("Relative age composition input sample size\n") +
   labs(pch = "Stock") +
   scale_color_scico_d(palette = 'roma',
                       name = "Composition type") + 
-  theme(text = element_text(size = 14)) -> p_iss_nss
+  geom_smooth(aes(group = comp_type), method = 'lm', se = F) +
+  theme(text = element_text(size = 14),
+        strip.text.y.right = element_text(angle = 0)) -> age_ss_iss
 
-ggsave(here::here("figs", "p_age_iss_nss.png"),
-       p_iss_nss,
+ggsave(here::here("figs", "age_ss_iss.png"),
+       age_ss_iss,
        device = "png",
        width = 7,
-       height = 6)
+       height = 7)
 
 
 
