@@ -252,6 +252,7 @@ One outcome of this study is guidance on how many length frequency collections a
 @Gerritsen2007 suggested that sampling rates for length frequency be 10 fish per length category based on the mean weighted coefficient of variation statistic.
 In practical implementation, their suggestion would result in stock-specific sampling rates at the haul level, where larger fish would require more samples, and smaller fish would require less.
 While this strategy makes biological sense and is attractive as it is related to life-history characteristics of the stocks being sampled, it could result in logistical difficulties when implemented during a survey.
+
 Based on the results of this study we suggest that a more logistically feasible length frequency sampling method would be to set the same sampling rate across stocks at the haul level, recognizing that length frequencies for some stocks may be over-sampled.
 For example, we found that limiting sampling at 100 to 150 fish per species within a haul (whether for total or sex-specific length composition) provided length composition data that had relatively similar uncertainty compared to length composition data derived from sampling at more intense rates (i.e., within 10% of the full dataset length composition ISS).
 Therefore, we conclude that there is little added benefit, in terms of reduced uncertainty, beyond sampling limits of 100 to 150 fish lengths per haul.
@@ -263,6 +264,7 @@ Based on the results of this analysis, we found the answer to this question to r
 As we increased the subsampling rates for age composition the age composition ISS continued to increase indicating that a sample size that produces diminishing returns had not been reached, unlike the asymptote observed for length composition ISS.
 In a similar study, @Siskey2023 evaluated the effect of increased age sampling beyond current sampling levels for a subset of stocks and also found that the age composition ISS continued to increase, up to age sampling levels 67% greater than current rates.
 @Siskey2023 also found that, while holding the total age samples constant, improvements to age composition ISS were found by increasing sampling in more hauls even while decreasing the number of specimen age data collected in any given haul.
+
 To determine if and when age composition ISS reaches an asymptote, simulation studies might be a more appropriate rather than bootstrapping historical data, as variables such as life-history or intra-haul correlation can be accounted for specifically [e.g., similar to @Hulson2011; @Xu2020].
 The results of our study, and ones like @Siskey2023, suggest that the number of age samples necessary to maximize to age composition information are likely beyond the current management agency capacities.
 In terms of what is necessary to provide adequate information to stock assessment models, the historical sampling levels have resulted in model outcomes that seem to have provided reasonable advice for management of North Pacific fish stocks.
@@ -277,6 +279,7 @@ In addition, when comparing across species groups we noted that the effect of re
 That is, a reduction in age sampling effort for flatfish and rockfish has a relatively larger impact on the reduction in age composition ISS as compared to gadids.
 A similar result was observed in @Hulson2017, where they found that age sample size had a relatively larger effect on the uncertainty in age composition data for rockfish, then flatfish, then gadids (including Atka mackerel).
 In terms of assessment outcome, @Siskey2023 showed that increasing or decreasing age sampling effort for rockfish had a larger subsequent effect on the uncertainty in management quantities than the gadid example, indicating that this relatively larger effect on age composition ISS translates through the assessment model as well.
+
 An extenuating circumstance that should be considered when evaluating the consequences of age sampling effort reduction for flatfish is that all of the stocks included in this analysis are managed using sex-specific assessment models.
 In comparison to the total (combined sex) age and length composition ISS, we show that the sex-specific composition ISS is smaller and differences in the magnitude of ISS exist between the two sexes.
 This often resulted in an ISS that is larger for female age composition than for males.
