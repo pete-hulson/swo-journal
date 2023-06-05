@@ -16,6 +16,12 @@ library(gg.layers)
 # extrafont::font_import()
 loadfonts(device="win")   
 
+# theme_set(afscassess::theme_report())
+
+
+
+
+
 # if you get a lot of messages like 'C:\Windows\Fonts\ALGER.TTF : No FontName. Skipping.'
 # then load this package and then run font_import
 # remotes::install_version("Rttf2pt1", version = "1.3.8")
@@ -74,17 +80,25 @@ names(surv_labs) <- c("ai", "bs", "goa")
 iss_plot <- function(data, type = 'age', reg = 'goa') {
   
   if(type == "age"){
+    
     data %>% 
-      tidytable::rename(sub_iss_age = base_iss_age,
-                        base_iss_age = sub_iss_age) %>% 
-      tidytable::mutate(sub_samp = '100') %>% 
+      tidytable::mutate(sub_iss_age = base_iss_age) %>% 
+      tidytable::summarise(sub_iss_age = mean(sub_iss_age), 
+                           .by = c(year, species_code, comp_type, species_name, surv_labs, species_type, region)) %>% 
+      tidytable::mutate(base_iss_age = sub_iss_age,
+                        sub_samp = '100',
+                        p_base = 1,
+                        prop_samp = 1) %>% 
       tidytable::bind_rows(data) %>% 
       tidytable::filter(species_type != 'other',
                         region == reg) %>% 
       ggplot(., aes(x = factor(sub_samp, level = c('25', '50', '75', '90', '100')), 
                     y = sub_iss_age, 
                     fill = comp_type)) +
-      geom_boxplot2(width.errorbar = 0) +
+      geom_boxplot2(width.errorbar = 0, 
+                    width = 0.9,
+                    position = position_dodge(preserve = "single"),
+                    alpha = 0.5) +
       facet_grid(species_name ~ comp_type, 
                  scales = "free",
                  labeller = label_wrap_gen(10)) +
@@ -99,16 +113,23 @@ iss_plot <- function(data, type = 'age', reg = 'goa') {
   } else {
     
     data %>% 
-      tidytable::rename(sub_iss_length = base_iss_length,
-                        base_iss_length = sub_iss_length) %>% 
-      tidytable::mutate(sub_iss_len = base_iss_length,
-                        sub_samp = 'Full') %>% 
+      tidytable::mutate(sub_iss_length = base_iss_length) %>% 
+      tidytable::summarise(sub_iss_length = mean(sub_iss_length), 
+                           iss_age = mean(iss_age),
+                           .by = c(year, species_code, comp_type, species_name, surv_labs, species_type, region)) %>% 
+      tidytable::mutate(base_iss_length = sub_iss_length,
+                        sub_samp = 'Full',
+                        p_base = 1,
+                        prop_samp = 1) %>% 
       tidytable::bind_rows(data) %>% 
       tidytable::filter(region == reg) %>% 
       ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250', 'Full')), 
                     y = sub_iss_length, 
                     fill = comp_type)) +
-      geom_boxplot2(width.errorbar = 0) +
+      geom_boxplot2(width.errorbar = 0, 
+                    width = 0.9,
+                    position = position_dodge(preserve = "single"),
+                    alpha = 0.5) +
       facet_grid(species_name ~ comp_type, 
                  scales = "free",
                  labeller = label_wrap_gen(10)) +
@@ -132,7 +153,10 @@ prop_iss_plot <- function(data, type = 'age', reg = 'goa') {
       ggplot(., aes(x = factor(sub_samp, level = c('25', '50', '75', '90')), 
                     y = p_base, 
                     fill = comp_type)) +
-      geom_boxplot2(width.errorbar = 0) +
+      geom_boxplot2(width.errorbar = 0, 
+                    width = 0.9,
+                    position = position_dodge(preserve = "single"),
+                    alpha = 0.5) +
       facet_grid(species_name ~ comp_type,
                  labeller = label_wrap_gen(10)) +
       theme(legend.position = "bottom",
@@ -151,7 +175,10 @@ prop_iss_plot <- function(data, type = 'age', reg = 'goa') {
       ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
                     y = p_base, 
                     fill = comp_type)) +
-      geom_boxplot2(width.errorbar = 0) +
+      geom_boxplot2(width.errorbar = 0, 
+                    width = 0.9,
+                    position = position_dodge(preserve = "single"),
+                    alpha = 0.5) +
       facet_grid(species_name ~ comp_type,
                  labeller = label_wrap_gen(10)) +
       theme(legend.position = "none",
@@ -171,16 +198,23 @@ prop_iss_plot <- function(data, type = 'age', reg = 'goa') {
 # plot length iss for type & sex ----
 
 len_iss %>% 
-  tidytable::rename(sub_iss_length = base_iss_length,
-                    base_iss_length = sub_iss_length) %>% 
-  tidytable::mutate(sub_iss_len = base_iss_length,
-                    sub_samp = 'Full') %>% 
+  tidytable::mutate(sub_iss_length = base_iss_length) %>% 
+  tidytable::summarise(sub_iss_length = mean(sub_iss_length), 
+                       iss_age = mean(iss_age),
+                       .by = c(year, species_code, comp_type, species_name, surv_labs, species_type, region)) %>% 
+  tidytable::mutate(base_iss_length = sub_iss_length,
+                    sub_samp = 'Full',
+                    p_base = 1,
+                    prop_samp = 1) %>% 
   tidytable::bind_rows(len_iss) %>% 
   tidytable::filter(species_type != 'other') %>% 
   ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250', 'Full')), 
                 y = sub_iss_length, 
                 fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
+  geom_boxplot2(width.errorbar = 0, 
+                width = 0.9,
+                position = position_dodge(preserve = "single"),
+                alpha = 0.5) +
   facet_grid(~ species_type, 
              scales = "free") + 
   theme(text = element_text(size = 14),
@@ -193,16 +227,23 @@ len_iss %>%
                      name = "Composition type") -> p1
 
 len_iss %>% 
-  tidytable::rename(sub_iss_length = base_iss_length,
-                    base_iss_length = sub_iss_length) %>% 
-  tidytable::mutate(sub_iss_len = base_iss_length,
-                    sub_samp = 'Full') %>% 
+  tidytable::mutate(sub_iss_length = base_iss_length) %>% 
+  tidytable::summarise(sub_iss_length = mean(sub_iss_length), 
+                       iss_age = mean(iss_age),
+                       .by = c(year, species_code, comp_type, species_name, surv_labs, species_type, region)) %>% 
+  tidytable::mutate(base_iss_length = sub_iss_length,
+                    sub_samp = 'Full',
+                    p_base = 1,
+                    prop_samp = 1) %>%  
   tidytable::bind_rows(len_iss) %>% 
   tidytable::filter(species_type != 'other') %>% 
   ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250', 'Full')), 
                 y = iss_age, 
                 fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
+  geom_boxplot2(width.errorbar = 0, 
+                width = 0.9,
+                position = position_dodge(preserve = "single"),
+                alpha = 0.5) +
   facet_grid(~ species_type, 
              scales = "free") + 
   theme(text = element_text(size = 14),
@@ -256,7 +297,10 @@ len_iss %>%
   ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
                 y = p_base, 
                 fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
+  geom_boxplot2(width.errorbar = 0, 
+                width = 0.9,
+                position = position_dodge(preserve = "single"),
+                alpha = 0.5) +
   facet_grid(surv_labs ~ species_type,
              labeller = label_wrap_gen(10)) +
   theme(legend.position = "bottom",
@@ -303,15 +347,22 @@ dev.off()
 # plot age iss subsample for type and region ----
 
 age_iss %>% 
-  tidytable::rename(sub_iss_age = base_iss_age,
-                    base_iss_age = sub_iss_age) %>% 
-  tidytable::mutate(sub_samp = '100') %>% 
+  tidytable::mutate(sub_iss_age = base_iss_age) %>% 
+  tidytable::summarise(sub_iss_age = mean(sub_iss_age), 
+                       .by = c(year, species_code, comp_type, species_name, surv_labs, species_type, region)) %>% 
+  tidytable::mutate(base_iss_age = sub_iss_age,
+                    sub_samp = '100',
+                    p_base = 1,
+                    prop_samp = 1) %>% 
   tidytable::bind_rows(age_iss) %>% 
   tidytable::filter(species_type != 'other') %>% 
   ggplot(., aes(x = factor(sub_samp, level = c('25', '50', '75', '90', '100')), 
                 y = sub_iss_age, 
                 fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
+  geom_boxplot2(width.errorbar = 0, 
+                width = 0.9,
+                position = position_dodge(preserve = "single"),
+                alpha = 0.5) +
   facet_grid(surv_labs ~ species_type,
         labeller = label_wrap_gen(10)) +
   theme(legend.position = "bottom",
@@ -364,7 +415,10 @@ age_iss %>%
   ggplot(., aes(x = factor(sub_samp, level = c('25', '50', '75', '90')), 
                 y = p_base, 
                 fill = comp_type)) +
-  geom_boxplot2(width.errorbar = 0) +
+  geom_boxplot2(width.errorbar = 0, 
+                width = 0.9,
+                position = position_dodge(preserve = "single"),
+                alpha = 0.5) +
   facet_grid(surv_labs ~ species_type,
              labeller = label_wrap_gen(10)) +
   theme(legend.position = "bottom",

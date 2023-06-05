@@ -59,27 +59,27 @@ source(here::here('R', "render_toc.R"))
 Unavoidable survey effort reduction has become a reality that must be accounted for in modern stock assessment models. 
 In addition, negative consequences to survey staff health due to repetitive motion injuries are becoming increasingly costly for managing agencies.
 In this study, we evaluated the outcomes of reductions in age and length data collections for composition data that are used in stock assessment models.
-The main goal was to determine if sampling can be reduced to a level that does not excessively increase data uncertainty yet provides a reduction in repetitive motions that can cause injury to survey staff.
-We found that reducing length sampling to a maximum of 100 to 150 fish sampled per haul (either sex-specific or combined sex) provides length composition data for which the uncertainty is not appreciably increased, and has no effect on the uncertainty in age composition data that is subsequently expanded from this sub-sampled length frequency data.
-We also found that as the subsampling rate of total age collections is increased, the uncertainty in the age composition also increases, but not at a rate proportional to the reduction in sampling effort.
+The main goal was to determine if sampling can be reduced to a level that does not excessively increase data uncertainty, yet provides a reduction in repetitive motions that can cause injury to survey staff.
+We found that reducing length sampling to a maximum of 100 to 150 fish sampled per haul (either sex-specific or combined sex) provides length composition data for which the uncertainty is not appreciably increased, and it has no effect on the uncertainty in age composition data that is subsequently expanded from this sub-sampled length frequency data.
+We also found that as the subsampling rate of total age collections is decreased, the uncertainty in the age composition also increases, but not at a rate proportional to the reduction in sampling effort.
 While there is a direct link between the uncertainty in data inputs and the uncertainty of assessment model predictions, reductions in length frequency sampling can be made without large consequences to model predictions.
 Conversely, there will be, at some level, consequences to model output with reductions in age collection sampling.
-The method employed here, and the results presented, can aid managing agencies to balance the magnitude of data collection on fishery-independent survey platforms and subsequent consequences to assessment models.
+The method employed here, and the results presented, can aid management agencies to balance the magnitude of data collection on fishery-independent survey platforms and subsequent consequences to assessment models.
 
 \newpage
 
 # Introduction
 
 Many integrated fishery stock assessments rely on information on fish population demographic composition in the form of length composition [@Punt2013] or as a derived quantity from length composition expanded to age composition [@Maunder2015]. 
-The most reliable age and length composition estimates are based on observations from fishery-independent surveys because these platforms generally avoid the sample selection bias inherent in directed commercial fisheries [@NRC1998]. 
+The most reliable age and length composition estimates are based on observations from fishery-independent surveys because these platforms generally avoid the sample selection bias inherent in directed commercial fisheries [@NRC1998]. *don't forget to change the NRC citation* 
 Past analyses have focused on the statistical efficiency of composition estimates for data weighting and applications to likelihood functions [e.g., @Thorson2014; @Thorson2017; @Francis2017]. 
 It is recognized in sampling theory that increasing the number of samples increases the precision of the estimate, and from this perspective, one should require the maximum number of samples per each survey observation. 
-Improvements in precision of age or length composition estimates are not only influenced by the magnitude of sampling, but also the way samples are collected [i.e., changing the number of samples collected within a haul versus changing the number of hauls from which samples were obtained; @Siskey2023]. 
+Improvements in precision of age or length composition estimates are not only influenced by the magnitude of sampling, but also the way samples are collected, for example, changing the number of samples collected within a haul versus changing the number of hauls from which samples were obtained [@Siskey2023]. 
 Further, each fish sampled on a survey has an immediate physical labor cost (e.g., at-sea time management issues), a cumulative health cost (e.g., repetitive stress injuries), downstream labor costs (e.g., staff effort reading otoliths to determine age), and budget costs (e.g., the monetary cost to perform a fisheries-independent survey).
 
 It is commonly understood that sampling to determine age and length composition of fishery-independent or fishery-dependent sources can be influenced by intra-haul correlation.
 For example, @Pennington2000 demonstrated that fish sampled from hauls that are similar in size and/or age may not be representative of the overall population’s size and/or age distribution owing to pseudoreplication. 
-To evaluate the level of intra-haul correlation, and account for it in fishery stock assessment, the concept of ‘effective sample size’ has been developed.
+To evaluate the level of intra-haul correlation, and to account for it in fishery stock assessment, the concept of ‘effective sample size’ has been developed.
 Effective sample size is smaller than the actual sample size reflecting the increase in uncertainty due to the intra-haul correlation displayed by the sampled species [e.g., @Mcallister1997]. 
 Several studies have used effective sample size to evaluate impacts on assessment results, including whether effective sample size can be estimated within the assessment model [@Francis2017; @Thorson2017; @Hulson2012], and more recently as a tool to evaluate the effect of changes to sampling methodologies on assessment model uncertainty [@Siskey2023]. 
 Further, methods have been developed that mimic the sampling designs for length and age composition to estimate effective sample size using bootstrap techniques external to an assessment model [@Stewart2014].
@@ -94,7 +94,7 @@ There are several unintended consequences associated with intense sampling of sp
 The length measurement process is repeated hundreds of thousands of times during an annual survey, and otolith sampling is repeated several thousands of times.
 This represents a daunting amount of work for field scientists on research vessels and for age readers once the survey is over.
 Further, a large portion of the fish sampled for length frequency are subsequently sampled for sex determination, which involves a substantial increase in handling and data collection effort.
-Each year, this workflow results in acute and repetitive stress injuries, some requiring medical interventions and claims to the U.S. Office of Workers' Compensation Programs. 
+Each year, this workflow results in acute and repetitive stress injuries, some requiring medical interventions and claims to the U.S. Office of Workers' Compensation Program. 
 Another consequence resulting from the intensity of this work is the introduction of unrecoverable errors in the observed data.
 Despite extensive *in situ* quality assurance protocols, as fatigue or injuries accumulate during the course of field work, so do the potential for data collection errors (e.g., failure to properly encode length measurements with the correct species or sex, or misidentification of sex).
 Aside from the budgetary constraints that are directly associated with operationalizing a fishery-independent survey, there are also downstream financial costs associated with composition collections, in particular, requiring properly trained staff to prepare and accurately read otoliths collected across many species.
@@ -106,8 +106,8 @@ The primary concern, from a stock assessment perspective, when reducing the samp
 To this end, effective sample size can be used as a tool to evaluate the consequences of changing sampling effort or strategies.
 An additional consideration when evaluating the consequences of optimizing sampling effort is the impacts on a species-specific basis to determine whether there are life-history characteristics that minimize the impacts of reduction in sampling effort in one species compared to another.
 
-In this study, using data collected by the AFSC GAP bottom trawl surveys across the EBS, AI, and GOA we evaluated the consequences of reductions in length frequency collections (including sex-specific length frequency) coupled with reductions in age composition sampling.
-Using effective sample size as the primary statistic to evaluate uncertainty in the age and length composition data derived from AFSC bottom trawl surveys, we evaluated the impact of reduced sampling to answer four questions: 1) what is the impact of reducing sampling in length frequency sampling (including sex determination sampling) and the subsequent expansion to age composition on the uncertainty in the composition data, 2) What is the impact of reducing sampling for age on uncertainty in age composition data, 3) Is there a point of diminishing returns as we increase the number of age and length samples, and 4) are there species-specific characteristics that mitigate, or exaggerate, the consequences of reductions in age or length composition sampling?
+In this study, using data collected by the AFSC GAP bottom trawl surveys across the EBS, AI, and GOA, we evaluated the consequences of reductions in length frequency collections (including sex-specific length frequency) coupled with reductions in age composition sampling.
+Using effective sample size as the primary statistic to evaluate uncertainty in the age and length composition data derived from AFSC bottom trawl surveys, we evaluated the impact of reduced sampling to answer four questions: 1) what is the impact of reducing sampling in length frequency sampling (including sex determination sampling) and the subsequent expansion to age composition on the uncertainty in the composition data?; 2) what is the impact of reducing sampling for age on uncertainty in age composition data?; 3) is there a point of diminishing returns as we increase the number of age and length samples?; and 4) are there species-specific characteristics that mitigate, or exaggerate, the consequences of reductions in age or length composition sampling?
 
 # Methods
 
@@ -117,18 +117,18 @@ Data collection for each AFSC GAP groundfish bottom trawl survey is described in
 The fundamental methods of length sample collection are generally synchronized between these surveys, with species-specific exceptions for minimum length sub-sample size. 
 Species and sex-specific length distributions within a catch sample are collected by 1) sorting the sample by species, 2) weighing each species in aggregate, 3) obtaining a random sub-sample of a target sample size, 4) sorting the sub-sample by sex (each fish is incised to visually determine sex), and 5) measuring length and recording each fish's measurements into a database. 
 Additionally, a subsample of fish are processed at sea to collect their sex, length, weight, and sagittal otoliths. 
-These otoliths are returned to the AFSC Age and Growth laboratory for age determination.
-Survey age sampling protocols are species specific and follow 1 of 2 paradigms: 1) a stratified collection distributed over both the spatial frame of the stratification scheme and the expected size range of a species; or 2) a small subsample (2-20 fish, species dependent) collected randomly per trawl. 
+These otoliths are returned to the AFSC's Age and Growth laboratory for age determination.
+Survey age sampling protocols are species specific and follow 1 of 2 paradigms: 1) a stratified random collection distributed over both the spatial frame of the stratification scheme and the expected size range of a species; or 2) a small subsample (2-20 fish, species dependent) collected randomly per trawl. 
 The protocol for some species has changed over the time series, generally following a trend of transitioning from protocol 1) to protocol 2). 
 
 Length frequency samples collected by the AFSC GAP bottom trawl surveys are expanded by area-swept catch-per-unit-effort (CPUE) and stratum area to obtain estimates of population abundance-at-length (i.e., design-based expansion).
-In a design-based expansion process, this is often referred to as the 'first stage expansion' and is a common method to obtain population estimates at length from area-swept survey data [@Ailloud2019; @Miller2006].
+In a design-based expansion process, this is often referred to as the 'first stage expansion' and it is a common method to obtain population estimates at length from area-swept survey data [@Ailloud2019; @Miller2006].
 Population abundance-at-length are computed for three sex categories (males, females, and unsexed) at the stratum level, which are then summed across strata to obtain the population abundance-at-length for the management-scale region (i.e., EBS, AI, or GOA).
 Strata are defined as regions with similar bathymetric characteristics (e.g., depth ranges), and population abundance-at-length within strata can also be summed to any sub-region level.
 Age-length-keys (ALKs) generated from the age-length paired observations within a survey are then applied to estimated abundance-at-length to provide an estimate of abundance-at-age [e.g., @QuinnDeriso1999].
 The specific methods the AFSC uses to expand length and age samples to abundance are shown in @Hulson2023b. 
 
-The stocks selected for this analysis are shown in Table \@ref(tab:species-samples) and were selected because all are assessed by the AFSC with statistical catch-at-age models and have corresponding expanded age and/or length composition estimates from the respective bottom trawl surveys. 
+The stocks selected for this analysis are presented in Table \@ref(tab:species-samples) and were selected because all are assessed by the AFSC with statistical catch-at-age models and have corresponding expanded age and/or length composition estimates from the respective bottom trawl surveys. 
 Historical data for each survey were used in this analysis to show results that reflect the consequences of sub-sampling. 
 To show the recent sampling magnitudes, the average length and age sample sizes from the most recent three survey years for the stocks selected are shown in Table \@ref(tab:species-samples). 
 
@@ -152,7 +152,7 @@ The core of the bootstrap-simulation function (steps 3 and 6 above) is designed 
 In step 3 of this bootstrap-simulation, the pre-determined subsampling level for lengths (whether total or sex-specific, $n_l$) in a given haul must be less than or equal to the sample size *x* collected in the historical data for that haul. 
 When the pre-determined subsampling level for lengths in a haul $n_l$ is less than the historical sample size *x* for that haul then a random draw of $n_l$ from the resampled lengths in step 2 is taken without replacement, if $n_l>x$ then the resampled lengths of size *x* in step 2 is used directly. 
 We set the subsampling level for length frequency at numbers per haul to evaluate the AFSC length sampling design. 
-Additionally, to subsample ages we reduced the proportion of the total number of ages sampled in step 6 to evaluate the consequences of reductions in overall age sampling, because the number of otoliths collected per haul for age analysis is typically small. 
+Additionally, to subsample ages, we reduced the proportion of the total number of ages sampled in step 6 to evaluate the consequences of reductions in overall age sampling, because the number of otoliths collected per haul for age analysis is typically small. 
 The bootstrap-simulation repeated steps 1-7 iteratively for each length and age subsample level, providing iterated population abundance-at-length and age that was then compared to the population abundance-at-length and age calculated from the original data.
 
 The length subsample levels that we evaluated from the full length frequency collections were 50, 100, 150, 200, and 250 samples per haul. 
@@ -165,10 +165,10 @@ The bootstrap-simulation was developed in R [@Rcore] and is available via GitHub
 
 Relative sample size, as introduced by @Mcallister1997, is a statistic that can evaluate the level of intra-haul correlation in age and length composition samples. 
 It is also a statistic that can evaluate the amount of uncertainty in estimated composition data compared to observed composition data. 
-Relative sample size $R_{i,y}$ is given by:
+Relative sample size $R_{i,y}$ is given by
 
 \begin{equation}
- R_{i,y}=\frac{\sum_{c=1}^{C}E_{c,i,y}(1-E_{c,i,y})}{\sum_{c=1}^{C}(E_{c,i,y}-O_{c,y})^2}
+ R_{i,y}=\frac{\sum_{c=1}^{C}O_{c,i,y}(1-O_{c,i,y})}{\sum_{c=1}^{C}(E_{c,i,y}-O_{c,y})^2}
  (\#eq:eqn1)
 \end{equation}
 
@@ -178,7 +178,7 @@ For each iteration of the bootstrap simulation for a pre-specified sub-sampling 
 Thus, across each iteration of the bootstrap simulation we computed a relative sample size that indicated the change in uncertainty caused by sub-sampling length frequency and age specimen data. 
 A larger relative sample size indicates higher certainty in the iterated composition estimates, while lower relative sample size indicates less certainty. 
 
-The harmonic mean was used to summarize these relative sample sizes across iterations.
+The harmonic mean was used to summarize these annual relative sample sizes across iterations.
 This has been shown to reduce bias in recovering the true sample size in simulations for a multinomial distribution and has been recommended to determine the ‘input sample size’ used as an initial weighting in stock assessment models to fit compositional data [@Stewart2014]. 
 Herein, we use the term ‘iterated relative sample size’ (iterated *R*) to refer to the relative sample sizes computed for each iteration of the bootstrap-simulation from \@ref(eq:eqn1), and we use the term ‘input sample size’ (ISS) to refer to the harmonic mean of the iterated relative sample sizes. 
 
@@ -192,26 +192,26 @@ To further explore and compare the general relationship between reduction in rel
 
 # Results
 
-As the number of length frequency sub-samples taken within hauls decreased, the ISS decreased, but not dramatically (e.g., moving right to left on the *x*-axis of the top panels in Figure \@ref(fig:length-iss)).
+As the number of length frequency sub-samples taken within hauls decreased, the length composition ISS decreased, but not dramatically (e.g., moving right to left on the *x*-axis of the top panels in Figure \@ref(fig:length-iss)).
 This trend of decreasing length composition ISS associated with decreasing sub-sampling levels per haul for length frequency was observed across all regions, stocks, and sex categories evaluated (Supplementary Material Figures S1--S3).
 The sex-specific length composition ISS were smaller than the total (combined sex) ISS for all stocks evaluated.
 This remained true for each individual sub-sampling case as well.
 However, stock-specific and species type differences in the magnitude of sex-specific ISS were observed (e.g., flatfish, including arrowtooth flounder and yellowfin sole).
 If the magnitudes were different, female length composition ISS was consistently larger than male length composition ISS; this same result was not replicated for the gadid and rockfish stocks, where the sex-specific ISS were relatively similar.
 While the magnitude of length composition ISS was species type, stock, and sex-specific, across survey years the length composition ISS generally ranged from 250 to 4,000 for flatfish, 100 to 3,500 for gadids, and 100 to 1,000 for rockfish (including the full dataset case and all sub-sampling levels).
-The variability in length composition ISS across survey years and haul sub-sampling levels was also species type and stock-specific, but the variability generally declined as the haul sub-sampling level decreased.
-Across the length frequency haul level sub-sampling cases evaluated, the magnitude of age composition ISS for all stocks within each region was unaffected by length sub-sampling (bottom panel of Figure \@ref(fig:length-iss)).
+The variability in length composition ISS across survey years and haul sub-sampling levels also varied between species types and stocks, but the variability generally declined as the haul sub-sampling level decreased.
+Across the length frequency haul level sub-sampling cases evaluated, the magnitude of age composition ISS for all stocks within each region was unaffected by length sub-sampling (bottom panels of Figure \@ref(fig:length-iss)).
 
 As the haul level length frequency sub-sampling level decreased the relative ISS also decreased (Figure \@ref(fig:prop-length-iss)).
-This decrease in relative ISS was exhibited by all stocks evaluated, although the magnitude of decrease was region and stock-specific (Supplementary Material Figures S4--S6).
+This decrease in relative ISS was exhibited by all stocks evaluated, although the magnitude of decrease was region- and stock-specific (Supplementary Material Figures S4--S6).
 In terms of stock-specific results, the largest decrease in the relative ISS across the length frequency sub-sampling levels occurred for EBS walleye pollock (Figure S5) and the smallest decrease occurred for GOA rex sole and southern rock sole (Figure S6).
 The largest variability across survey years in the relative ISS was observed for sub-sampling levels of 50 and 100 lengths per haul for AI walleye pollock (Figure S4) and GOA northern rockfish (Figure S6).
 However, in terms of species type results across the survey regions (Figure \@ref(fig:prop-length-iss)), the decrease in relative ISS as the haul length frequency sub-sampling level decreased was very similar, while the variability could be slightly different in some cases (e.g., variability at the haul level sub-sampling rate of 50 as compared across species types and survey regions).
 For sub-sampling levels of 150 and greater, the variability in length composition relative ISS was small and consistent across all the species types and survey regions evaluated.
 
-While the magnitude of decrease in the length composition relative ISS was survey region and sex-specific, none of the stocks decreased below 50%, and most stocks did not decrease below 60% (Figure \@ref(fig:prop-length-iss)).
+While the magnitude of decrease in the length composition relative ISS was survey region- and sex-specific, none of the stocks decreased below 50%, and most stocks did not decrease below 60% (Figure \@ref(fig:prop-length-iss)).
 The range in the length composition annual relative ISS across the sex categories evaluated either included or was above 90% for length frequency sub-sampling levels greater than 100 fish per haul.
-EBS walleye pollock was the one exception (Figure S5), where the relative ISS was less than 90% for females and males.
+EBS walleye pollock was the one exception (Figure S5) where the relative ISS was less than 90% for females and males.
 Besides EBS walleye pollock, in which the range in the relative ISS included 90%, the remainder of the stocks evaluated resulted in relative ISS greater than 90% for length frequency sub-sampling levels of 150 fish per haul or more regardless of length composition sex category.
 Sampling at a level of 100 to 150 fish per haul for length frequency would result in 7,000 - 32,000 fewer collections per-year for the surveys evaluated (Table \@ref(tab:ss-saved)).
 
@@ -220,20 +220,21 @@ We note that this result was consistent across all regions, stocks, and sex cate
 Similar to the results for length composition ISS, the sex-specific age composition ISS were smaller than the total (combined sex) ISS across all stocks evaluated, and the magnitude of age composition ISS compared between sex categories (female and male) differed by species types.
 Following the results of the sex-specific length composition ISS, if the magnitudes in age composition ISS were different between the sex categories, the female age composition ISS was larger than the male age composition ISS, which resulted for the flatfish stocks evaluated.
 For the gadid and rockfish stocks evaluated the magnitude of sex-specific age composition ISS was generally similar.
-The magnitude of sex-specific and total ISS were stock-specific, and overall ranged from 10 to 500; which was smaller than the length composition ISS in the same year for the same stock.
+The magnitude of sex-specific and total ISS were stock-specific, and overall ranged from 10 to 500, which was smaller than the length composition ISS in the same year for the same stock.
 The range in ISS was generally of a similar magnitude across the species types (Figure \@ref(fig:age-iss)) but could vary depending on the survey region.
-For example, the AI survey had smaller age composition ISS for flatfish stocks than the EBS and GOA, although, there are fewer stocks in the AI than the other survey regions.
-Additionally, the age composition ISS for gadid stocks were of similar magnitude and range in the AI and GOA, but were larger and had a greater range in the EBS.
-The variability in annual age composition ISS was also stock specific, where some stocks displayed larger range in age composition ISS across survey years than others.
+For example, the AI survey had smaller age composition ISS for flatfish stocks than the EBS and GOA, although there are fewer stocks in the AI than the other survey regions.
+Additionally, the age composition ISS for gadid stocks were of similar magnitude and range in the AI and GOA but were larger and had a greater range in the EBS.
+The variability in annual age composition ISS was also stock-specific, where some stocks displayed larger range in age composition ISS across survey years than others.
 
 As the specimen age data sampling level decreased the age composition relative ISS also decreased (Figure \@ref(fig:prop-age-iss)).
 Some of the largest decreases in age composition ISS across the total age sub-sampling levels resulted for arrowtooth flounder and Pacific cod in each survey region evaluated, while the smallest decrease resulted for GOA walleye pollock (see Supplementary Material Figures S10--S12).
-The largest variability across the survey years in the relative ISS across age sub-sampling levels again resulted for Pacific cod, but also included AI Atka mackerel and walleye pollock across each survey area, with relatively low variability observed for the remaining stocks.
+The largest variability across the survey years in the relative ISS across age sub-sampling levels again resulted for Pacific cod, but it also included AI Atka mackerel and walleye pollock across each survey area, with relatively low variability observed for the remaining stocks.
 Even though there were differences in the age composition relative ISS across the age sub-sampling levels evaluated, the trends across species types and survey regions were generally consistent, where gadids displayed the largest range in the decrease in relative ISS within each survey region (Figure \@ref(fig:prop-age-iss)).
-While the decrease in both length and age composition relative ISS was consistent as the sub-sampling level decreased, while the relative length composition ISS plateaued beyond around 150 lengths per haul, the relative age composition ISS did not replicate this plateau, but rather, continued to increase as the sub-sampling level increased.
+While the decrease in both length and age composition relative ISS was consistent as the sub-sampling level decreased, the relative length composition ISS plateaued beyond around 150 lengths per haul.
+The relative age composition ISS did not replicate this plateau, but rather continued to increase as the sub-sampling level increased.
 
 A notable result was that for all stocks evaluated, the decrease in age composition relative ISS was dampened when compared to the specimen age sub-sampling level collected (Figure \@ref(fig:age-ss-iss)).
-For example, a reduction to 25% of the specimen age sample data did not translate to an age composition relative ISS reduction to 25%, but rather resulted in a sub-sampled dataset age composition relative ISS of 30-40%; this was true at each age collection sub-sampling level evaluated.
+For example, a reduction to 25% of the specimen age sample data did not translate to an age composition relative ISS reduction to 25%, but rather it resulted in a sub-sampled dataset age composition relative ISS of 30-40%; this was true at each age collection sub-sampling level evaluated.
 For rockfish and flatfish, the reduction in ISS compared to the reduction in specimen age samples were similar, both across stocks, survey regions, and sex categories.
 By comparison, for gadids and other (Atka mackerel), the reduction in age composition relative ISS compared to reduction in specimen age samples was further dampened, whereby the reduction in total age samples resulted in a proportionally smaller reduction in age composition ISS compared to rockfish and flatfish stocks (indicated by the slopes in the linear model fits in Figure \@ref(fig:age-ss-iss)).
 Regardless, for all stocks and sex categories evaluated, the reduction in relative ISS was less than the reduction in the specimen age samples collected on the surveys.
@@ -241,20 +242,21 @@ Regardless, for all stocks and sex categories evaluated, the reduction in relati
 # Discussion
 
 In this study, we developed a method to evaluate the consequences of reduced sampling effort on uncertainty in age and length composition data and demonstrated a decrease in the ISS from experimental treatments compared to the full dataset base case due to less sampling.
-We found that the ISS for age composition data was more sensitive to reductions in sampling effort than the ISS for length composition.
-We also show that while the age composition ISS was sensitive to reductions in age sampling effort, the ISS for age composition was unaffected by the level of sub-sampling in the length frequency collections.
+We found that the reductions in age sampling effort had a great effect on the age composition ISS than reductions in length sampling effort had on the length composition ISS.
+We also show that the age composition ISS was unaffected by reductions in length sampling effort.
 Looking across multiple survey regions revealed that these reductions in ISS, which represent increases in uncertainty, were stock-specific but the reductions were generally consistent.
 Based on the proportional decrease in ISS from sub-sampled data compared to the ISS generated from full datasets, we found that there are recommendations that can be made to balance the tradeoff of collecting a robust sample size of age and length compositions on fishery-independent platforms while also considering of the amount of effort the crew must expend to obtain these samples.
 
 One outcome of this study is guidance on how many length frequency collections are necessary to provide adequate information for stock assessment models.
-@Gerritsen2007 suggested that sampling rates for length frequency be 10 fish per length category based on the mean weighted coefficient of variation statistic.
-In practical implementation, their suggestion results in stock-specific sampling rates at the haul level, where larger fish would require more samples, and smaller fish would require less samples.
-While this strategy makes biological sense and is attractive as it is related to life-history characteristics of the stocks being sampled, it could result in logistical difficulties when implemented during a survey.
+@Gerritsen2007 suggested that sampling rates for length frequency be 10 fish per length category within a haul based on the mean weighted coefficient of variation statistic.
+In practical implementation, their suggestion results in stock-specific sampling rates at the haul level, where species that are larger (and presumably have more length bins) would require more samples than species that are smaller.
+While this strategy makes biological sense and is attractive as it is related to life-history characteristics of the stocks being sampled, it is a more complicated sampling design compared to sampling at the same total rate for all the species caught.
+This sampling design could result in logistical difficulties when implemented during a survey to try and keep track of species-specific sampling rates when sampling from a haul.
 
-Based on the results of this study we suggest a more logistically feasible length frequency sampling method to set the same sampling rate across stocks at the haul level, recognizing that length frequencies for some stocks may be over-sampled.
+Based on the results of this study, we suggest a more logistically feasible length frequency sampling method to set the same sampling rate across stocks at the haul level, recognizing that length frequencies for some stocks may be over-sampled.
 For example, we found that limiting sampling at 100 to 150 fish per species within a haul (whether for total or sex-specific length composition) provided length composition data that had relatively similar uncertainty compared to length composition data derived from sampling at more intense rates (i.e., within 10% of the full dataset length composition ISS).
 Therefore, we conclude that there is little added benefit, in terms of reduced uncertainty, beyond sampling limits of 100 to 150 fish lengths per haul.
-This also indicates that we are currently beyond a saturation point for length composition information on these surveys (i.e., a point of diminishing returns) whereby the current sampling rate does not offer much improvement in uncertainty over a lower sampling rate.
+This also indicates that we are currently beyond a saturation point for length composition information on these surveys (i.e., a point of diminishing returns), whereby the current sampling rate does not offer much improvement in uncertainty over a lower sampling rate.
 However, this is not the case for age composition sampling.
 
 Another application of our study is related to determining how many age collections are necessary to provide adequate information to stock assessments models.
@@ -264,16 +266,15 @@ In a similar study, @Siskey2023 evaluated the effect of increased age sampling b
 @Siskey2023 also found that, while holding the total age samples constant, improvements to age composition ISS were achieved by increasing sampling in more hauls even while decreasing the number of specimen age data collected in any given haul.
 
 To determine if and when age composition ISS reaches an asymptote, simulation studies might be more appropriate rather than bootstrapping historical data, as variables such as life-history or intra-haul correlation can be accounted for specifically [e.g., @Hulson2011; @Xu2020].
-The results of this study, and others like @Siskey2023, suggest that the number of age samples necessary to maximize age composition information are likely beyond the current management agency capacities.
+The results of this study and @Siskey2023 suggest that the number of age samples necessary to maximize age composition information are likely beyond current management agency capacities.
 In terms of what is necessary to provide adequate information to stock assessment models, the historical sampling levels have resulted in model outcomes that seem to have provided reasonable advice for management of North Pacific fish stocks.
 Our recommendation, therefore, is to attempt to retain historical levels of sampling for age composition, as reductions in these sampling rates have downstream effects on assessment model uncertainty.
-We also recommend (and reiterating the results of @Siskey2023) that if sampling for ages were to be optimized for effort required by a survey team ISS can be increased by spreading these samples across more hauls while retaining the historical total number of age samples collected.
+We also recommend [and reiterating the results of @Siskey2023] that if sampling for ages were to be optimized, an effective approach would be to increase the number of hauls sampled while retaining the historical total number of age samples collected, effective spreading these samples across more hauls and reducing the number of samples collected in any given haul.
 
-Across the stocks evaluated, the increase in length composition ISS as haul sub-sampling rates increased were extremely consistent, with no clear species-specific patterns.
-There were interesting species group (e.g., flatfish, gadids, and rockfish) patterns when examining reductions in age sampling rates, however.
-Overall, we found that the effect of decreasing age sampling rates was not one-to-one in relation to the rate of decrease in age composition ISS, but rather had a dampened effect.
+Across the stocks evaluated, the increase in length composition ISS as haul sub-sampling rates increased were extremely consistent, with no clear species-specific patterns; however, there were interesting species group (e.g., flatfish, gadids, and rockfish) patterns when examining reductions in age sampling rates.
+Overall, we found that the effect of decreasing age sampling rates was not one-to-one in relation to the rate of decrease in age composition ISS, but rather it had a dampened effect.
 For example, a 10% reduction in age sampling effort did not result in a 10% reduction in age composition ISS, but rather a 5-8% reduction, depending on the stock.
-In addition, when comparing across species groups we noted that the effect of reductions in age sampling efforts was relatively larger for flatfish and rockfish as compared to gadids (and fish species such as Atka mackerel).
+In addition, when comparing across species groups, we noted that the effect of reductions in age sampling efforts was relatively larger for flatfish and rockfish as compared to gadids (and fish species such as Atka mackerel).
 That is, a reduction in age sampling effort for flatfish and rockfish has a relatively larger impact on the reduction in age composition ISS compared to gadids.
 A similar result was observed in @Hulson2017, who found that age sample size had a relatively larger effect on the uncertainty in age composition data for rockfish, followed by flatfish, then gadids (including Atka mackerel).
 In terms of assessment outcome, @Siskey2023 showed that increasing or decreasing age sampling effort for rockfish had a larger subsequent effect on the uncertainty in management quantities than the gadid example, indicating that this relatively larger effect on age composition ISS translates through the assessment model as well.
@@ -282,7 +283,7 @@ An extenuating circumstance that should be considered when evaluating the conseq
 In comparison to the total (combined sex) age and length composition ISS, we showed that the sex-specific composition ISS is smaller and differences in the magnitude of ISS exist between the two sexes.
 This resulted in an ISS that is larger for female age composition than for males.
 It must be noted that reductions in age sampling effort for flatfish affects uncertainty in sex-specific age composition.
-While we encourage maintaining historical levels of age sampling effort, we  recommend that if reductions must be made, decision-makers should consider the unequal consequences of these reductions across species types (i.e., make decisions on a species-specific basis), perhaps using an analytical tool like the one we created for this study.
+While we encourage maintaining historical levels of age sampling effort, we  recommend that if reductions must be made, decision-makers should consider the unequal consequences of these reductions across species types (i.e., make decisions on a species-specific basis), perhaps using an analytical tool like the one that we created for this study.
 
 Recently, a large amount of effort has been dedicated to evaluating the consequences of reductions in survey effort and the best methods to use to conduct these analyses [@ICES2020; @ICES2023]. 
 The Workshop on Unavoidable Survey Effort Reduction (WKUSER) identified empirical resampling analyses to obtain estimates of uncertainty in abundance indices and composition data as critical when sudden changes in sampling are needed. 
@@ -295,8 +296,7 @@ While collecting total length frequency data is cheap in terms of effort require
 Collecting age samples requires additional effort beyond determining the sex of a fish, including extraction of the sagittal otoliths which are then prepared and read in an ageing laboratory.
 The cost of age reading for several stocks evaluated here is summarized in @Lambert2017 and further evaluated in @Siskey2023.
 In short, the monetary expense of each otolith is not inconsequential and the savings to an agency as a result of reduced age sampling could be in the tens of thousands of dollars (USD).
-However, @Siskey2023 showed that there are downstream effects of increased uncertainty in assessment model estimates of the overfishing limit when age sampling is reduced.
-Buffers in catch limits based on estimates of uncertainty in derived assessment quantities [e.g., @Prager2003] are not used in the North Pacific.
+However, @Siskey2023 showed that there are downstream effects of increased uncertainty in assessment model estimates of the overfishing limit when age sampling is reduced, which would subsequently effect buffers in catch limits based on estimates of uncertainty in derived assessment quantities [e.g., @Prager2003].
 In areas where these types of buffers are used, a reduction in age composition sampling could lead to greater assessment uncertainty and directly impact the value of fisheries through a reduction in catch.
 However, from a survey effort perspective when collecting otoliths, it may be more efficient to collect less otoliths from any given haul while at the same time increase the number of hauls from which otoliths are collected. 
 
@@ -305,9 +305,9 @@ Future work to evaluate the consequences of reducing, or increasing, composition
 
 # Acknowledgments
 
-We thank the remaining members of the AFSC Survey Workload Optimization Working Group for their contributions to this work: William T. Stockhausen, Susanne F. McDermott and W. Chris Long.
+We thank the remaining members of the AFSC Survey Workload Optimization Working Group for their contributions to this work: William T. Stockhausen, Susanne F. McDermott, and W. Chris Long.
 We express our deep gratitude to all the AFSC staff who have spent time at sea and staring through microscopes to produce the data these analyses are based upon.
-We thank Lewis Barnett and Cecilia O'Leary for helpful reviews of previous versions of this manuscript.
+We thank Lewis Barnett, Cecilia O'Leary, and Paul Spencer for helpful reviews of previous versions of this manuscript.
 
 \newpage
 
