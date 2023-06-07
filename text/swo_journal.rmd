@@ -168,7 +168,7 @@ It is also a statistic that can evaluate the amount of uncertainty in estimated 
 Relative sample size $R_{i,y}$ is given by
 
 \begin{equation}
- R_{i,y}=\frac{\sum_{c=1}^{C}O_{c,i,y}(1-O_{c,i,y})}{\sum_{c=1}^{C}(E_{c,i,y}-O_{c,y})^2}
+ R_{i,y}=\frac{\sum_{c=1}^{C}O_{c,y}(1-O_{c,y})}{\sum_{c=1}^{C}(E_{c,i,y}-O_{c,y})^2}
  (\#eq:eqn1)
 \end{equation}
 
