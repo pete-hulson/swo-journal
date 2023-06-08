@@ -56,15 +56,14 @@ source(here::here('R', "render_toc.R"))
 
 # Abstract 
 
-Unavoidable survey effort reduction has become a reality that must be accounted for in modern stock assessment models. 
+Unavoidable survey effort reduction has become a reality that must be accounted for in fisheries stock assessment. 
 In addition, negative consequences to survey staff health due to repetitive motion injuries are becoming increasingly costly for managing agencies.
-In this study, we evaluated the outcomes of reductions in age and length data collections for composition data that are used in stock assessment models.
+In this study, we evaluated the outcomes of reductions in age and length data used in fisherries stock assessment models.
 The main goal was to determine if sampling can be reduced to a level that does not excessively increase data uncertainty, yet provides a reduction in repetitive motions that can cause injury to survey staff.
 We found that reducing length sampling to a maximum of 100 to 150 fish sampled per haul (either sex-specific or combined sex) provides length composition data for which the uncertainty is not appreciably increased, and it has no effect on the uncertainty in age composition data that is subsequently expanded from this sub-sampled length frequency data.
-We also found that as the subsampling rate of total age collections is decreased, the uncertainty in the age composition also increases, but not at a rate proportional to the reduction in sampling effort.
-While there is a direct link between the uncertainty in data inputs and the uncertainty of assessment model predictions, reductions in length frequency sampling can be made without large consequences to model predictions.
-Conversely, there will be, at some level, consequences to model output with reductions in age collection sampling.
-The method employed here, and the results presented, can aid management agencies to balance the magnitude of data collection on fishery-independent survey platforms and subsequent consequences to assessment models.
+The method employed here, and the results presented, can aid management agencies to balance the magnitude of data collection on and subsequent consequences to fisheries stock assessment models.
+
+Keywords: age and length sampling, fisheries stock assessment models, uncertainty
 
 \newpage
 
@@ -109,7 +108,7 @@ An additional consideration when evaluating the consequences of optimizing sampl
 In this study, using data collected by the AFSC GAP bottom trawl surveys across the EBS, AI, and GOA, we evaluated the consequences of reductions in length frequency collections (including sex-specific length frequency) coupled with reductions in age composition sampling.
 Using effective sample size as the primary statistic to evaluate uncertainty in the age and length composition data derived from AFSC bottom trawl surveys, we evaluated the impact of reduced sampling to answer four questions: 1) what is the impact of reducing sampling in length frequency sampling (including sex determination sampling) and the subsequent expansion to age composition on the uncertainty in the composition data?; 2) what is the impact of reducing sampling for age on uncertainty in age composition data?; 3) is there a point of diminishing returns as we increase the number of age and length samples?; and 4) are there species-specific characteristics that mitigate, or exaggerate, the consequences of reductions in age or length composition sampling?
 
-# Methods
+# Materials and methods
 
 ## Computing length and age composition from bottom trawl survey data
 
@@ -308,6 +307,26 @@ Future work to evaluate the consequences of reducing, or increasing, composition
 We thank the remaining members of the AFSC Survey Workload Optimization Working Group for their contributions to this work: William T. Stockhausen, Susanne F. McDermott, and W. Chris Long.
 We express our deep gratitude to all the AFSC staff who have spent time at sea and staring through microscopes to produce the data these analyses are based upon.
 We thank Lewis Barnett, Cecilia O'Leary, and Paul Spencer for helpful reviews of previous versions of this manuscript.
+
+# Competing interests
+The authors declare there are no competing interests.
+
+# Author contribution
+Conceptualization: P-JFH, BCW, MDB, JC, MRS
+Data curation: P-JFH, BCW, MDB, JC
+Formal analysis: P-JFH, BCW, MDB
+Funding acquisition: N/A
+Investigation: P-JFH, BCW, MDB
+Methodology: P-JFH, BCW
+Project administration: P-JFH
+Resources: N/A
+Software: BCW, P-JFH
+Supervision: P-JFH
+Validation: P-JFH, BCW
+Visualization: P-JFH, BCW
+Writing – original draft: P-JFH, BCW, MDB, JC, MRS
+Writing – review & editing: P-JFH, BCW, MDB, JC, MRS
+
 
 \newpage
 
