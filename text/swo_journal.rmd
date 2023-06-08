@@ -312,25 +312,25 @@ We thank Lewis Barnett, Cecilia O'Leary, and Paul Spencer for helpful reviews of
 The authors declare there are no competing interests.
 
 # Author contribution
-Conceptualization: P-JFH, BCW, MDB, JC, MRS
-Data curation: P-JFH, BCW, MDB, JC
-Formal analysis: P-JFH, BCW, MDB
-Funding acquisition: N/A
-Investigation: P-JFH, BCW, MDB
-Methodology: P-JFH, BCW
-Project administration: P-JFH
-Resources: N/A
-Software: BCW, P-JFH
-Supervision: P-JFH
-Validation: P-JFH, BCW
-Visualization: P-JFH, BCW
-Writing – original draft: P-JFH, BCW, MDB, JC, MRS
-Writing – review & editing: P-JFH, BCW, MDB, JC, MRS
+Conceptualization: P-JFH, BCW, MDB, JC, MRS 
+Data curation: P-JFH, BCW, MDB, JC 
+Formal analysis: P-JFH, BCW, MDB 
+Funding acquisition: N/A 
+Investigation: P-JFH, BCW, MDB 
+Methodology: P-JFH, BCW 
+Project administration: P-JFH 
+Resources: N/A 
+Software: BCW, P-JFH 
+Supervision: P-JFH 
+Validation: P-JFH, BCW 
+Visualization: P-JFH, BCW 
+Writing – original draft: P-JFH, BCW, MDB, JC, MRS 
+Writing – review & editing: P-JFH, BCW, MDB, JC, MRS 
 
 
 \newpage
 
-# Citations
+# References
 
 <div id="refs"></div>
 
