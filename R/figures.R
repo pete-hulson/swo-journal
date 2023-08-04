@@ -293,11 +293,16 @@ len_iss %>%
 len_iss %>%
   tidytable::filter(species_type != 'other') %>% 
   tidytable::select(year, species_code, species_type, comp_type, iss_age, sub_samp, region) %>% 
-  tidytable::left_join(age_iss %>% 
-                         tidytable::filter(species_type != 'other') %>% 
-                         tidytable::select(year, species_code, species_type, comp_type, base_iss_age, sub_samp, region) %>% 
-                         tidytable::filter(sub_samp == 90) %>% 
-                         tidytable::select(-sub_samp)) %>% 
+  tidytable::left_join(len_iss %>% 
+                         tidytable::mutate(sub_iss_length = base_iss_length) %>% 
+                         tidytable::summarise(sub_iss_length = mean(sub_iss_length), 
+                                              iss_age = mean(iss_age),
+                                              .by = c(year, species_code, comp_type, species_name, surv_labs, species_type, region)) %>% 
+                         tidytable::mutate(base_iss_age = iss_age,
+                                           sub_samp = 'Full',
+                                           p_base = 1,
+                                           prop_samp = 1) %>% 
+                         tidytable::select(year, species_code, species_type, comp_type, base_iss_age, region)) %>% 
   tidytable::mutate(p_base = iss_age / base_iss_age) %>% 
   ggplot(., aes(x = factor(sub_samp, level = c('50', '100', '150', '200', '250')), 
                 y = p_base, 
@@ -469,6 +474,8 @@ ggsave(here::here("figs", "age_reliss.png"),
 # plot relationship between decrease in iss and nss
 
 age_iss %>% 
+  tidytable::summarise(p_base = mean(p_base), 
+                       .by = c(species_code, comp_type, sub_samp, prop_samp, species_name, species_type)) %>% 
   ggplot(.,aes(x = prop_samp, y = p_base, pch = as.factor(species_name), color = as.factor(comp_type))) +
   geom_point() +
   scale_shape_manual(values=seq(0,14)) +
