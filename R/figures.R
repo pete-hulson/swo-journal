@@ -426,6 +426,7 @@ age_iss %>%
   facet_grid( ~ species_type,
         labeller = label_wrap_gen(10)) +
   theme(legend.position = "none",
+        text = element_text(size = 14),
         axis.text.x = element_blank(),
         axis.title.x = element_blank()) +
   xlab("\nAge sub-sampling level (%)") +
